@@ -1,4 +1,4 @@
-﻿using MaterialsWarehouse.Domain.Entities;
+﻿using Manufacturing.Common.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MaterialsWarehouse.Infrastructure.Repositories

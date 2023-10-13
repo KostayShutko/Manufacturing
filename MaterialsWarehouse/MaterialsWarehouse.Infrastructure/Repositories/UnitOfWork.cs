@@ -1,4 +1,4 @@
-﻿using MaterialsWarehouse.Domain.Entities;
+﻿using Manufacturing.Common.Models;
 using MaterialsWarehouse.Infrastructure.Database;
 using System.Collections;
 
