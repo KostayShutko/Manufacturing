@@ -1,4 +1,4 @@
-﻿namespace Manufacturing.Common.Models
+﻿namespace Manufacturing.Common.Domain
 {
     public abstract class BaseEntity
     {

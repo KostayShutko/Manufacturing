@@ -1,4 +1,4 @@
-﻿using Manufacturing.Common.Models;
+﻿using Manufacturing.Common.Domain;
 
 namespace MaterialsWarehouse.Domain.Entities
 {
