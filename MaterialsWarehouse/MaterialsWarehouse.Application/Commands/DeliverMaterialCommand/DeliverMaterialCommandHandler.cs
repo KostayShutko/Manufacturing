@@ -1,5 +1,5 @@
-﻿using MaterialsWarehouse.Domain.Entities;
-using MaterialsWarehouse.Infrastructure.Repositories;
+﻿using Manufacturing.Common.Repository;
+using MaterialsWarehouse.Domain.Entities;
 using MediatR;
 
 namespace MaterialsWarehouse.Application.Commands.DeliverMaterialCommand

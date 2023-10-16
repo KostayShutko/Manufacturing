@@ -1,7 +1,7 @@
 ﻿using Manufacturing.Common.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace MaterialsWarehouse.Infrastructure.Repositories
+namespace Manufacturing.Common.Repository
 {
     public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
     {

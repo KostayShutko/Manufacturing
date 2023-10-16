@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Manufacturing.Common.Repository;
 using MaterialsWarehouse.Application.DTOs;
 using MaterialsWarehouse.Application.Specifications;
 using MaterialsWarehouse.Domain.Entities;
-using MaterialsWarehouse.Infrastructure.Repositories;
 using MediatR;
 
 namespace MaterialsWarehouse.Application.Queries.GetAllMaterialsQuery

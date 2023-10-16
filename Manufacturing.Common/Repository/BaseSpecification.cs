@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace MaterialsWarehouse.Infrastructure.Repositories
+namespace Manufacturing.Common.Repository
 {
     public abstract class BaseSpecification<T> : ISpecification<T>
     {

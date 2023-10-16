@@ -1,15 +1,15 @@
 ﻿using Manufacturing.Common.Domain;
-using MaterialsWarehouse.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 using System.Collections;
 
-namespace MaterialsWarehouse.Infrastructure.Repositories
+namespace Manufacturing.Common.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly MaterialsContext context;
-        private Hashtable _repositories;
+        private readonly DbContext context;
+        private Hashtable repositories;
 
-        public UnitOfWork(MaterialsContext context)
+        public UnitOfWork(DbContext context)
         {
             this.context = context;
         }
@@ -21,12 +21,12 @@ namespace MaterialsWarehouse.Infrastructure.Repositories
 
         public IRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
         {
-            if (_repositories == null)
-                _repositories = new Hashtable();
+            if (repositories == null)
+                repositories = new Hashtable();
 
             var type = typeof(TEntity).Name;
 
-            if (!_repositories.ContainsKey(type))
+            if (!repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(Repository<>);
 
@@ -34,10 +34,10 @@ namespace MaterialsWarehouse.Infrastructure.Repositories
                     Activator.CreateInstance(repositoryType
                         .MakeGenericType(typeof(TEntity)), context);
 
-                _repositories.Add(type, repositoryInstance);
+                repositories.Add(type, repositoryInstance);
             }
 
-            return _repositories[type] as IRepository<TEntity>;
+            return repositories[type] as IRepository<TEntity>;
         }
 
         public async Task CommitAsync() => await context.SaveChangesAsync();

@@ -1,5 +1,5 @@
-﻿using MaterialsWarehouse.Domain.Entities;
-using MaterialsWarehouse.Infrastructure.Repositories;
+﻿using Manufacturing.Common.Repository;
+using MaterialsWarehouse.Domain.Entities;
 
 namespace MaterialsWarehouse.Application.Specifications
 {

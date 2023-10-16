@@ -1,6 +1,6 @@
 ﻿using Manufacturing.Common.Domain;
 
-namespace MaterialsWarehouse.Infrastructure.Repositories
+namespace Manufacturing.Common.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
