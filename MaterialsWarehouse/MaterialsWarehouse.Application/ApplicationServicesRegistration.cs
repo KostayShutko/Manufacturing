@@ -7,7 +7,10 @@ namespace MaterialsWarehouse.Application
     {
         public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
         {
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            var executingAssembly = Assembly.GetExecutingAssembly();
+
+            services.AddAutoMapper(executingAssembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(executingAssembly));
 
             return services;
         }

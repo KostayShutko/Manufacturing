@@ -40,6 +40,14 @@ namespace MaterialsWarehouse.Infrastructure.Repositories
             return _repositories[type] as IRepository<TEntity>;
         }
 
+        public async Task CommitAsync() => await context.SaveChangesAsync();
+
+        public void BeginTransaction() => context.Database.BeginTransaction();
+
+        public void CommitTransaction() => context.Database.CommitTransaction();
+
+        public void RollbackTransaction() => context.Database.RollbackTransaction();
+
         public void Dispose()
         {
             context.Dispose();

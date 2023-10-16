@@ -18,39 +18,41 @@ namespace MaterialsWarehouse.Infrastructure.Repositories
             return (await context.Set<TEntity>().AddAsync(entity)).Entity;
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            context.Set<TEntity>().AddRange(entities);
+            await context.Set<TEntity>().AddRangeAsync(entities);
         }
 
-        public bool Contains(ISpecification<TEntity> specification)
+        public async Task<bool> ContainsAsync(ISpecification<TEntity> specification)
         {
-            return Count(specification) > 0 ? true : false;
+            var count = await CountAsync(specification);
+            return count > 0 ? true : false;
         }
 
-        public bool Contains(Expression<Func<TEntity, bool>> predicate)
+        public async Task<bool> ContainsAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return Count(predicate) > 0 ? true : false;
+            var count = await CountAsync(predicate);
+            return count > 0 ? true : false;
         }
 
-        public int Count(ISpecification<TEntity> specification)
+        public async Task<int> CountAsync(ISpecification<TEntity> specification)
         {
-            return ApplySpecification(specification).Count();
+            return (await ApplySpecification(specification)).Count();
         }
 
-        public int Count(Expression<Func<TEntity, bool>> predicate)
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return context.Set<TEntity>().Where(predicate).Count();
+            return await context.Set<TEntity>().Where(predicate).CountAsync();
         }
 
-        public IEnumerable<TEntity> Find(ISpecification<TEntity> specification)
+        public async Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification)
         {
-            return ApplySpecification(specification);
+            return await ApplySpecification(specification);
         }
 
-        public TEntity FindById(int id)
+        public async Task<TEntity> FindByIdAsync(int id)
         {
-            return context.Set<TEntity>().Find(id);
+            return await context.Set<TEntity>().FindAsync(id);
         }
 
         public void Remove(TEntity entity)
@@ -69,9 +71,9 @@ namespace MaterialsWarehouse.Infrastructure.Repositories
             context.Entry(entity).State = EntityState.Modified;
         }
 
-        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
+        private async Task<IEnumerable<TEntity>> ApplySpecification(ISpecification<TEntity> spec)
         {
-            return SpecificationEvaluator<TEntity>.GetQuery(context.Set<TEntity>().AsQueryable(), spec);
+            return await SpecificationEvaluator<TEntity>.GetQuery(context.Set<TEntity>().AsQueryable(), spec).ToListAsync();
         }
     }
 }
