@@ -16,7 +16,7 @@ namespace Manufacturing.Common.Repository
 
         Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
 
-        Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification);
+        IQueryable<TEntity> Find(ISpecification<TEntity> specification);
 
         Task<TEntity> FindByIdAsync(int id);
 

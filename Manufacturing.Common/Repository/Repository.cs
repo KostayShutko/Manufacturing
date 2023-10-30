@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Manufacturing.Common.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         protected readonly DbContext context;
 
@@ -37,7 +37,7 @@ namespace Manufacturing.Common.Repository
 
         public async Task<int> CountAsync(ISpecification<TEntity> specification)
         {
-            return (await ApplySpecification(specification)).Count();
+            return await ApplySpecification(specification).CountAsync();
         }
 
         public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
@@ -45,9 +45,9 @@ namespace Manufacturing.Common.Repository
             return await context.Set<TEntity>().Where(predicate).CountAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> FindAsync(ISpecification<TEntity> specification)
+        public IQueryable<TEntity> Find(ISpecification<TEntity> specification)
         {
-            return await ApplySpecification(specification);
+            return ApplySpecification(specification);
         }
 
         public async Task<TEntity> FindByIdAsync(int id)
@@ -71,9 +71,9 @@ namespace Manufacturing.Common.Repository
             context.Entry(entity).State = EntityState.Modified;
         }
 
-        private async Task<IEnumerable<TEntity>> ApplySpecification(ISpecification<TEntity> spec)
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
         {
-            return await SpecificationEvaluator<TEntity>.GetQuery(context.Set<TEntity>().AsQueryable(), spec).ToListAsync();
+            return SpecificationEvaluator<TEntity>.GetQuery(context.Set<TEntity>().AsQueryable(), spec);
         }
     }
 }

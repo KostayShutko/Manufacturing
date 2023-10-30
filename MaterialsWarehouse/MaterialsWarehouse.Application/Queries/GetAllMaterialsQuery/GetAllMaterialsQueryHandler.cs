@@ -4,6 +4,7 @@ using MaterialsWarehouse.Application.DTOs;
 using MaterialsWarehouse.Application.Specifications;
 using MaterialsWarehouse.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace MaterialsWarehouse.Application.Queries.GetAllMaterialsQuery
 {
@@ -20,7 +21,7 @@ namespace MaterialsWarehouse.Application.Queries.GetAllMaterialsQuery
 
         public async Task<IEnumerable<MaterialDto>> Handle(GetAllMaterialsQuery query, CancellationToken cancellationToken)
         {
-            var materials = await unitOfWork.Repository<Material>().FindAsync(new LastMaterialSpecification());
+            var materials = await unitOfWork.Repository<Material>().Find(new AllMaterialsSpecification()).ToListAsync();
 
             return mapper.Map<IEnumerable<MaterialDto>>(materials);
         }

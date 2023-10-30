@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Manufacturing.Common.Repository
 {
-    public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
+    public class SpecificationEvaluator<TEntity> where TEntity : Entity
     {
         public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> specification)
         {

@@ -2,5 +2,6 @@
 {
     public class MaterialDto : BaseEntityDto
     {
+        public string State { get; set; }
     }
 }

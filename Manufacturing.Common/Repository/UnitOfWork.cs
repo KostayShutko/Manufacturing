@@ -19,7 +19,7 @@ namespace Manufacturing.Common.Repository
             return context.SaveChangesAsync();
         }
 
-        public IRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
+        public IRepository<TEntity> Repository<TEntity>() where TEntity : Entity
         {
             if (repositories == null)
                 repositories = new Hashtable();

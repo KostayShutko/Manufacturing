@@ -17,7 +17,7 @@ namespace MaterialsWarehouse.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStudentAsync()
+        public async Task<IActionResult> DeliverMaterialAsync()
         {
             var result = await mediator.Send(new DeliverMaterialCommand());
             return Ok(result);

@@ -15,7 +15,7 @@ namespace MaterialsWarehouse.Application.Commands.DeliverMaterialCommand
 
         public async Task<int> Handle(DeliverMaterialCommand command, CancellationToken cancellationToken)
         {
-            var material = new Material();
+            var material = Material.Create();
 
             var addedMaterial = await unitOfWork.Repository<Material>().AddAsync(material);
             await unitOfWork.SaveChangesAsync();
