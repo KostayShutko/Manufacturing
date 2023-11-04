@@ -1,4 +1,4 @@
-﻿using Manufacturing.Common.Repository;
+﻿using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

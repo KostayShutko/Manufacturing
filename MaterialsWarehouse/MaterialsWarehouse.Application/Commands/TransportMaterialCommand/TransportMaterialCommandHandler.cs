@@ -1,10 +1,11 @@
-﻿using Manufacturing.Common.Repository;
+﻿using Manufacturing.Common.Application.ResponseResults;
+using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Domain.Entities;
 using MediatR;
 
 namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand
 {
-    public class TransportMaterialCommandHandler : IRequestHandler<TransportMaterialCommand, int>
+    public class TransportMaterialCommandHandler : IRequestHandler<TransportMaterialCommand, ResponseResult>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -13,7 +14,7 @@ namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(TransportMaterialCommand command, CancellationToken cancellationToken)
+        public async Task<ResponseResult> Handle(TransportMaterialCommand command, CancellationToken cancellationToken)
         {
             var material = await unitOfWork.Repository<Material>().FindByIdAsync(command.MaterialId);
 
@@ -22,7 +23,7 @@ namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand
             unitOfWork.Repository<Material>().Update(material);
             await unitOfWork.SaveChangesAsync();
 
-            return material.Id;
+            return ResponseResult.CreateSuccess();
         }
     }
 }

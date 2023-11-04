@@ -1,5 +1,7 @@
-﻿using MaterialsWarehouse.Application;
+﻿using Manufacturing.Common.API.Middlewares;
+using MaterialsWarehouse.Application;
 using MaterialsWarehouse.Infrastructure;
+using Microsoft.AspNetCore.HttpsPolicy;
 
 namespace MaterialsWarehouse.API
 {
@@ -20,6 +22,8 @@ namespace MaterialsWarehouse.API
 
             services.ConfigureApplicationServices();
             services.ConfigureInfrastructureServices(Configuration);
+
+            services.AddScoped<ExceptionHandlingMiddleware>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,6 +33,8 @@ namespace MaterialsWarehouse.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseRouting();

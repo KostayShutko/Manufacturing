@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Manufacturing.Common.Repository
+namespace Manufacturing.Common.Infrastructure.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {

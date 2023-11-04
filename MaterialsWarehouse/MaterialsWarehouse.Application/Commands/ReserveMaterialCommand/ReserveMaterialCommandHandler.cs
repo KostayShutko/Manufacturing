@@ -1,4 +1,5 @@
-﻿using Manufacturing.Common.Repository;
+﻿using Manufacturing.Common.Application.ResponseResults;
+using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Application.Specifications;
 using MaterialsWarehouse.Domain.Entities;
 using MediatR;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
 {
-    public class ReserveMaterialCommandHandler : IRequestHandler<ReserveMaterialCommand, int>
+    public class ReserveMaterialCommandHandler : IRequestHandler<ReserveMaterialCommand, ResponseResult<int>>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -15,7 +16,7 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(ReserveMaterialCommand command, CancellationToken cancellationToken)
+        public async Task<ResponseResult<int>> Handle(ReserveMaterialCommand command, CancellationToken cancellationToken)
         {
             var material = await unitOfWork.Repository<Material>().Find(new MaterialToReserveSpecification()).FirstAsync();
 
@@ -24,7 +25,7 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
             unitOfWork.Repository<Material>().Update(material);
             await unitOfWork.SaveChangesAsync();
 
-            return material.Id;
+            return ResponseResult.CreateSuccess(material.Id);
         }
     }
 }

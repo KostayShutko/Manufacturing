@@ -1,4 +1,4 @@
-﻿using Manufacturing.Common.Repository;
+﻿using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Domain.Entities;
 
 namespace MaterialsWarehouse.Application.Specifications

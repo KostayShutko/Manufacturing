@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 
-namespace Manufacturing.Common.Repository
+namespace Manufacturing.Common.Infrastructure.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

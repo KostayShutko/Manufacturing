@@ -1,4 +1,6 @@
-﻿namespace MaterialsWarehouse.Application.DTOs
+﻿using Manufacturing.Common.Application.DTOs;
+
+namespace MaterialsWarehouse.Application.DTOs
 {
     public class MaterialDto : BaseEntityDto
     {
