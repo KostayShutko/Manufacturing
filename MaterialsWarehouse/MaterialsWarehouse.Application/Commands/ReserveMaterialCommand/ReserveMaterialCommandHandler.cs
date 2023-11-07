@@ -18,7 +18,12 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
 
         public async Task<ResponseResult<int>> Handle(ReserveMaterialCommand command, CancellationToken cancellationToken)
         {
-            var material = await unitOfWork.Repository<Material>().Find(new MaterialToReserveSpecification()).FirstAsync();
+            var material = await unitOfWork.Repository<Material>().Find(new MaterialToReserveSpecification()).FirstOrDefaultAsync();
+
+            if (material == null)
+            {
+                return ResponseResult<int>.CreateFail("No material to reserve");
+            }
 
             material.Reserve();
 
