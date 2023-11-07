@@ -1,4 +1,5 @@
-﻿using Manufacturing.Common.Infrastructure.Repository;
+﻿using Manufacturing.Common.Infrastructure.Providers;
+using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ namespace MaterialsWarehouse.Infrastructure
         {
             services.AddDbContext<MaterialsContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IUnitOfWork>(serviceProvider => new UnitOfWork(serviceProvider.GetService<MaterialsContext>()));
+            services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
             return services;
         }

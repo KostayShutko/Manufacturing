@@ -1,4 +1,4 @@
-﻿using Manufacturing.Common.Domain;
+﻿using Manufacturing.Common.Domain.Entities;
 
 namespace Manufacturing.Common.Infrastructure.Repository
 {
