@@ -36,16 +36,19 @@ namespace Manufacturing.Common.Infrastructure.Interceptors
                 return;
             }
 
+            var currentDateTime = dateTimeProvider.GetCurrentDateTime();
+
             foreach (var entry in context.ChangeTracker.Entries<Entity>())
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Entity.CreatedOn = dateTimeProvider.GetCurrentDateTime();
+                    entry.Entity.CreatedOn = currentDateTime;
+                    entry.Entity.UpdatedOn = currentDateTime;
                 }
                
                 if (entry.State == EntityState.Modified || HasChangedOwnedEntities(entry))
                 {
-                    entry.Entity.UpdatedOn = dateTimeProvider.GetCurrentDateTime();
+                    entry.Entity.UpdatedOn = currentDateTime;
                 }
             }
         }
