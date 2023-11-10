@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Manufacturing.Common" Version="1.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.22">
       <PrivateAssets>all</PrivateAssets>
@@ -18,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Manufacturing.Common\Manufacturing.Common.csproj" />
     <ProjectReference Include="..\MaterialsWarehouse.Domain\MaterialsWarehouse.Domain.csproj" />
   </ItemGroup>
 

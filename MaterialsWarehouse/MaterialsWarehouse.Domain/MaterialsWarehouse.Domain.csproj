@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Manufacturing.Common" Version="1.0.0" />
+    <ProjectReference Include="..\..\Manufacturing.Common\Manufacturing.Common.csproj" />
   </ItemGroup>
 
 </Project>
