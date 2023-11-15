@@ -9,7 +9,10 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj", "MaterialsWarehouse/MaterialsWarehouse.API/"]
 RUN dotnet restore "MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj"
-COPY . .
+
+COPY ./MaterialsWarehouse/ ./MaterialsWarehouse/
+COPY ./Manufacturing.Common/ ./Manufacturing.Common/
+
 WORKDIR "MaterialsWarehouse/MaterialsWarehouse.API"
 RUN dotnet build "MaterialsWarehouse.API.csproj" -c Release -o /app/build
 
