@@ -7,14 +7,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["MaterialsWarehouse.API/MaterialsWarehouse.API.csproj", "MaterialsWarehouse.API/"]
-RUN dotnet restore "MaterialsWarehouse.API/MaterialsWarehouse.API.csproj"
+COPY ["MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj", "MaterialsWarehouse/MaterialsWarehouse.API/"]
+RUN dotnet restore "MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj"
 COPY . .
-WORKDIR "/src/MaterialsWarehouse.API"
-RUN dotnet build "MaterialsWarehouse.API.csproj" -c Release -o /app/build
+WORKDIR /src
+RUN dotnet build "MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "MaterialsWarehouse.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
