@@ -1,6 +1,17 @@
 version: '3.4'
 
 services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    ports:
+      - 1433:1433
+    volumes:
+      - sqlserverdata:/var/opt/mssql 
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Manufacturing2023
+
   materialswarehouse:
     container_name: materialswarehouse
     ports:
@@ -10,3 +21,9 @@ services:
     build:
         context: .
         dockerfile: MaterialsWarehouse/MaterialsWarehouse.API/Dockerfile
+    depends_on:
+        - sqlserver
+
+volumes:
+  sqlserverdata:
+    driver: local
