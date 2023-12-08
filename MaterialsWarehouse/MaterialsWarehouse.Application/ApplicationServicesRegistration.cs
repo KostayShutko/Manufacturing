@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Manufacturing.Common.Application.Behaviours;
+using MaterialsWarehouse.Application.Consumers;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -21,5 +22,7 @@ namespace MaterialsWarehouse.Application
 
             return services;
         }
+
+        public static Type[] GetConsumers() => new Type[] { typeof(ReserveMaterialConsumer) };
     }
 }

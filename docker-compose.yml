@@ -11,6 +11,14 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=Manufacturing2023
+      
+  rabbitmq:
+    container_name: "rabbitmqcontainer"
+    image: rabbitmq:management
+    hostname: "rabbitmq"
+    ports:
+        - '5672:5672'
+        - '15672:15672'
 
   materialswarehouse:
     container_name: materialswarehouse

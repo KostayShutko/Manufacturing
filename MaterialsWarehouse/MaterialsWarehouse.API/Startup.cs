@@ -20,7 +20,7 @@ namespace MaterialsWarehouse.API
             services.AddSwaggerGen();
 
             services.ConfigureApplicationServices();
-            services.ConfigureInfrastructureServices(Configuration);
+            services.ConfigureInfrastructureServices(Configuration, ApplicationServicesRegistration.GetConsumers());
 
             services.AddScoped<ExceptionHandlingMiddleware>();
         }
