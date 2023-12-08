@@ -1,26 +1,18 @@
 ﻿using AutoMapper;
+using Manufacturing.Common.Application.Consumers;
 using Manufacturing.Common.Application.EventContracts;
 using MassTransit;
-using MaterialsWarehouse.Application.Commands.ReserveMaterialCommand;
 using MediatR;
 
 namespace MaterialsWarehouse.Application.Consumers
 {
-    public class ReserveMaterialConsumer : IConsumer<ReserveMaterialCommandEvent>
+    public class ReserveMaterialConsumer : BaseConsumer<ReserveMaterialCommandEvent>, IConsumer<ReserveMaterialCommandEvent>
     {
-        private readonly IMediator mediator;
-        private readonly IMapper mapper;
-
-        public ReserveMaterialConsumer(IMediator mediator, IMapper mapper)
-        {
-            this.mediator = mediator;
-            this.mapper = mapper;
-        }
+        public ReserveMaterialConsumer(IMediator mediator, IMapper mapper) : base(mediator, mapper) { }
 
         public async Task Consume(ConsumeContext<ReserveMaterialCommandEvent> context)
         {
-            var command = mapper.Map<ReserveMaterialCommand>(context.Message);
-            var result = await mediator.Send(command);
+            var result = HandleMessage(context);
         }
     }
 }

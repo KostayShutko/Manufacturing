@@ -1,6 +1,6 @@
-﻿using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using FluentValidation;
+using Manufacturing.Common.Application.Factories;
 using Manufacturing.Common.Application.ResponseResults;
 using Manufacturing.Common.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +27,7 @@ namespace Manufacturing.Common.API.Middlewares
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = statusCode;
 
-            var error = GetErrors(exception);
+            var error = ErrorMessageFactory.CreateErrorMessage(exception);
             var response = ResponseResult.CreateFail(error);
             await httpContext.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
@@ -40,25 +40,6 @@ namespace Manufacturing.Common.API.Middlewares
                 BusinessRuleValidationException => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
             };
-        }
-
-        private static string GetErrors(Exception exception)
-        {
-            var strBuilder = new StringBuilder();
-
-            if (exception is ValidationException validationException)
-            {
-                foreach (var failure in validationException.Errors)
-                {
-                    strBuilder.AppendLine($"{failure.PropertyName}: {failure.ErrorMessage}");
-                }
-            }
-            else
-            {
-                strBuilder.Append(exception.Message);
-            }
-
-            return strBuilder.ToString();
         }
     }
 }
