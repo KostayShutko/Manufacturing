@@ -27,6 +27,7 @@ namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand
             unitOfWork.Repository<Material>().Update(material);
             await unitOfWork.SaveChangesAsync();
 
+            await eventPublisher.Publish(new MaterialTransportedEvent(material.Id));
             await eventPublisher.Publish(new ReserveMaterialCommandEvent());
 
             return ResponseResult.CreateSuccess();
