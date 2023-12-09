@@ -6,8 +6,9 @@ using MediatR;
 
 namespace Manufacturing.Common.Application.Consumers
 {
-    public abstract class BaseConsumer<TMessage>
+    public abstract class BaseConsumer<TMessage, TCommand>
         where TMessage : class
+        where TCommand : class
     {
         private readonly IMediator mediator;
         private readonly IMapper mapper;
@@ -22,7 +23,7 @@ namespace Manufacturing.Common.Application.Consumers
         {
             try
             {
-                var command = mapper.Map<TMessage>(context.Message);
+                var command = mapper.Map<TCommand>(context.Message);
                 var result = await mediator.Send(command);
                 if (result is ResponseResultBase responseResult)
                 {

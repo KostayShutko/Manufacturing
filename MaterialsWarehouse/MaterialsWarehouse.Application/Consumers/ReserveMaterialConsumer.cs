@@ -4,11 +4,12 @@ using Manufacturing.Common.Application.EventContracts;
 using Manufacturing.Common.Application.ResponseResults;
 using Manufacturing.Common.Infrastructure.EventBus;
 using MassTransit;
+using MaterialsWarehouse.Application.Commands.ReserveMaterialCommand;
 using MediatR;
 
 namespace MaterialsWarehouse.Application.Consumers
 {
-    public class ReserveMaterialConsumer : BaseConsumer<ReserveMaterialCommandEvent>, IConsumer<ReserveMaterialCommandEvent>
+    public class ReserveMaterialConsumer : BaseConsumer<ReserveMaterialCommandEvent, ReserveMaterialCommand>, IConsumer<ReserveMaterialCommandEvent>
     {
         private readonly IEventPublisher eventPublisher;
 
