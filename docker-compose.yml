@@ -11,14 +11,18 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=Manufacturing2023
+    networks: 
+      - manufacturing-network
       
   rabbitmq:
-    container_name: "rabbitmqcontainer"
+    container_name: "rabbitmq"
     image: rabbitmq:management
     hostname: "rabbitmq"
     ports:
-        - '5672:5672'
-        - '15672:15672'
+      - '5672:5672'
+      - '15672:15672'
+    networks: 
+      - manufacturing-network
 
   materialswarehouse:
     container_name: materialswarehouse
@@ -31,6 +35,11 @@ services:
         dockerfile: MaterialsWarehouse/MaterialsWarehouse.API/Dockerfile
     depends_on:
         - sqlserver
+    networks: 
+      - manufacturing-network
+
+networks:
+  manufacturing-network:
 
 volumes:
   sqlserverdata:
