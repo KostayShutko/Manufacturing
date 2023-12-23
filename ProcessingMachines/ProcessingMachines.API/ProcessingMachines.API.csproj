@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>290f159a-ede1-4883-a5eb-d0259be9b238</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="MediatR" Version="12.1.1" />
+	<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.22">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Manufacturing.Common\Manufacturing.Common.csproj" />
+    <ProjectReference Include="..\ProcessingMachines.Application\ProcessingMachines.Application.csproj" />
+    <ProjectReference Include="..\ProcessingMachines.Infrastructure\ProcessingMachines.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
