@@ -16,8 +16,9 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     State = table.Column<int>(type: "int", nullable: false),
-                    StartedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CompletedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MaterialId = table.Column<int>(type: "int", nullable: false),
+                    StartedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CompletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

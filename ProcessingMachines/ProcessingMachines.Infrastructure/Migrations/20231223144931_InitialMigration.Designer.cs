@@ -12,7 +12,7 @@ using ProcessingMachines.Infrastructure.Database;
 namespace ProcessingMachines.Infrastructure.Migrations
 {
     [DbContext(typeof(ProcessesContext))]
-    [Migration("20231223134345_InitialMigration")]
+    [Migration("20231223144931_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,13 +32,16 @@ namespace ProcessingMachines.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CompletedOn")
+                    b.Property<DateTime?>("CompletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartedOn")
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("State")

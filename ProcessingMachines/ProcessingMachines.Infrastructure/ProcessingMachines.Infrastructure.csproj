@@ -21,6 +21,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Manufacturing.Common\Manufacturing.Common.csproj" />
     <ProjectReference Include="..\ProcessingMachines.Domain\ProcessingMachines.Domain.csproj" />
+  </ItemGroup>	
+	
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

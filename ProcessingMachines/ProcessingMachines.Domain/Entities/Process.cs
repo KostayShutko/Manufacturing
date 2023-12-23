@@ -15,7 +15,7 @@ public class Process : Entity
 
     public ProcessState State { get; set; }
 
-    public int MaterialId { get; }
+    public int MaterialId { get; set; }
 
     public DateTime? StartedOn { get; set; }
 
