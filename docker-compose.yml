@@ -37,6 +37,20 @@ services:
         - sqlserver
     networks: 
       - manufacturing-network
+      
+  processingmachines:
+    container_name: processingmachines
+    ports:
+        - 5001:80
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Production
+    build:
+        context: .
+        dockerfile: ProcessingMachines/ProcessingMachines.API/Dockerfile
+    depends_on:
+        - sqlserver
+    networks: 
+      - manufacturing-network
 
 networks:
   manufacturing-network:

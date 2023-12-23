@@ -2,6 +2,7 @@
 using Manufacturing.Common.Application.Behaviours;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using ProcessingMachines.Application.Consumers;
 using System.Reflection;
 
 namespace ProcessingMachines.Application;
@@ -22,5 +23,10 @@ public static class ApplicationServicesRegistration
         return services;
     }
 
-    public static Type[] GetConsumers() => new Type[] { };
+    public static Type[] GetConsumers() => 
+        new Type[] 
+        { 
+            typeof(MaterialTransportedConsumer), 
+            typeof(ProcessCreatedConsumer) 
+        };
 }
