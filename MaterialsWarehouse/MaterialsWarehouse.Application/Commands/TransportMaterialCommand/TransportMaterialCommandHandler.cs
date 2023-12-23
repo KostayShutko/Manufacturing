@@ -1,4 +1,4 @@
-﻿using Manufacturing.Common.Application.EventContracts;
+﻿using Manufacturing.Common.Application.EventContracts.Materials;
 using Manufacturing.Common.Application.ResponseResults;
 using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Repository;

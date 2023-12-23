@@ -11,14 +11,14 @@ namespace MaterialsWarehouse.Infrastructure
 {
     public static class InfrastructureServicesRegistration
     {
-        public static IServiceCollection ConfigureInfrastructureServices(
+        public static IServiceCollection AddInfrastructureServices(
             this IServiceCollection services, 
             IConfiguration configuration, 
             Type[] consumers)
         {
             services.AddMassTransitBus(configuration, consumers);
             services.AddTransient<IEventPublisher, EventPublisher>();
-            services.AddDbContext<MaterialsContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<MaterialsContext>(options => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnectionString")));
             services.AddTransient<IUnitOfWork>(serviceProvider => new UnitOfWork(serviceProvider.GetService<MaterialsContext>()));
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 

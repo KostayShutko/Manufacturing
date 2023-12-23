@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Manufacturing.Common.Application.EventContracts;
+using Manufacturing.Common.Application.EventContracts.Materials;
 using MaterialsWarehouse.Application.Commands.ReserveMaterialCommand;
 using MaterialsWarehouse.Application.DTOs;
 using MaterialsWarehouse.Domain.Entities;

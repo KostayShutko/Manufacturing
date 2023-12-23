@@ -19,8 +19,8 @@ namespace MaterialsWarehouse.API
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            services.ConfigureApplicationServices();
-            services.ConfigureInfrastructureServices(Configuration, ApplicationServicesRegistration.GetConsumers());
+            services.AddApplicationServices();
+            services.AddInfrastructureServices(Configuration, ApplicationServicesRegistration.GetConsumers());
 
             services.AddScoped<ExceptionHandlingMiddleware>();
         }

@@ -9,7 +9,7 @@ namespace MaterialsWarehouse.Application
 {
     public static class ApplicationServicesRegistration
     {
-        public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
 
