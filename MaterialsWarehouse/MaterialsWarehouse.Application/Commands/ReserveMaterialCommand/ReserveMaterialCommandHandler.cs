@@ -1,4 +1,5 @@
-﻿using Manufacturing.Common.Application.ResponseResults;
+﻿using Manufacturing.Common.Application.Commands;
+using Manufacturing.Common.Application.ResponseResults;
 using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Application.Specifications;
 using MaterialsWarehouse.Domain.Entities;
@@ -7,18 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
 {
-    public class ReserveMaterialCommandHandler : IRequestHandler<ReserveMaterialCommand, ResponseResult<int>>
+    public class ReserveMaterialCommandHandler : BaseCommand<Material>, IRequestHandler<ReserveMaterialCommand, ResponseResult<int>>
     {
-        private readonly IUnitOfWork unitOfWork;
-
         public ReserveMaterialCommandHandler(IUnitOfWork unitOfWork)
+            :base(unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseResult<int>> Handle(ReserveMaterialCommand command, CancellationToken cancellationToken)
         {
-            var material = await unitOfWork.Repository<Material>().Find(new MaterialToReserveSpecification()).FirstOrDefaultAsync();
+            var material = await FindBySpecification(new MaterialToReserveSpecification()).FirstOrDefaultAsync();
 
             if (material == null)
             {
@@ -27,8 +26,7 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
 
             material.Reserve();
 
-            unitOfWork.Repository<Material>().Update(material);
-            await unitOfWork.SaveChangesAsync();
+            await SaveChangesAsync(material);
 
             return ResponseResult.CreateSuccess(material.Id);
         }

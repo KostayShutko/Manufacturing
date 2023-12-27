@@ -1,17 +1,16 @@
-﻿using Manufacturing.Common.Application.ResponseResults;
+﻿using Manufacturing.Common.Application.Commands;
+using Manufacturing.Common.Application.ResponseResults;
 using Manufacturing.Common.Infrastructure.Repository;
 using MediatR;
 using ProcessingMachines.Domain.Entities;
 
 namespace ProcessingMachines.Application.Commands.StartProcessCommand;
 
-public class StartProcessCommandHandler : IRequestHandler<StartProcessCommand, ResponseResult>
+public class StartProcessCommandHandler : BaseCommand<Process>, IRequestHandler<StartProcessCommand, ResponseResult>
 {
-    private readonly IUnitOfWork unitOfWork;
-
     public StartProcessCommandHandler(IUnitOfWork unitOfWork)
+        : base(unitOfWork)
     {
-        this.unitOfWork = unitOfWork;
     }
 
     public async Task<ResponseResult> Handle(StartProcessCommand command, CancellationToken cancellationToken)
@@ -25,12 +24,11 @@ public class StartProcessCommandHandler : IRequestHandler<StartProcessCommand, R
 
     private async Task StartExecution(int processId)
     {
-        var process = await unitOfWork.Repository<Process>().FindByIdAsync(processId);
+        var process = await FindByIdAsync(processId);
 
         process.StartExecution();
 
-        unitOfWork.Repository<Process>().Update(process);
-        await unitOfWork.SaveChangesAsync();
+        await SaveChangesAsync(process);
     }
 
     private async Task ExecuteProcess()
@@ -40,11 +38,10 @@ public class StartProcessCommandHandler : IRequestHandler<StartProcessCommand, R
 
     private async Task Complete(int processId)
     {
-        var process = await unitOfWork.Repository<Process>().FindByIdAsync(processId);
+        var process = await FindByIdAsync(processId);
 
         process.Complete();
 
-        unitOfWork.Repository<Process>().Update(process);
-        await unitOfWork.SaveChangesAsync();
+        await SaveChangesAsync(process);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Manufacturing.Common.Application.EventContracts.Materials;
+﻿using Manufacturing.Common.Application.Commands;
+using Manufacturing.Common.Application.EventContracts.Materials;
 using Manufacturing.Common.Application.ResponseResults;
 using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Repository;
@@ -7,28 +8,25 @@ using MediatR;
 
 namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand
 {
-    public class TransportMaterialCommandHandler : IRequestHandler<TransportMaterialCommand, ResponseResult>
+    public class TransportMaterialCommandHandler : BaseCommand<Material>, IRequestHandler<TransportMaterialCommand, ResponseResult>
     {
-        private readonly IUnitOfWork unitOfWork;
         private readonly IEventPublisher eventPublisher;
 
         public TransportMaterialCommandHandler(IUnitOfWork unitOfWork, IEventPublisher eventPublisher)
+            : base(unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
             this.eventPublisher = eventPublisher;
         }
 
         public async Task<ResponseResult> Handle(TransportMaterialCommand command, CancellationToken cancellationToken)
         {
-            var material = await unitOfWork.Repository<Material>().FindByIdAsync(command.MaterialId);
+            var material = await FindByIdAsync(command.MaterialId);
 
             material.Transport();
 
-            unitOfWork.Repository<Material>().Update(material);
-            await unitOfWork.SaveChangesAsync();
+            await SaveChangesAsync(material);
 
             await eventPublisher.Publish(new MaterialTransportedEvent(material.Id));
-            await eventPublisher.Publish(new ReserveMaterialCommandEvent());
 
             return ResponseResult.CreateSuccess();
         }

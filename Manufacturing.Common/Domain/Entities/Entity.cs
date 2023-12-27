@@ -18,5 +18,7 @@ namespace Manufacturing.Common.Domain.Entities
                 throw new BusinessRuleValidationException(rule);
             }
         }
+
+        public bool IsNew() => Id == 0;
     }
 }
