@@ -12,7 +12,7 @@ using ProcessingMachines.Infrastructure.Database;
 namespace ProcessingMachines.Infrastructure.Migrations
 {
     [DbContext(typeof(ProcessesContext))]
-    [Migration("20231223144931_InitialMigration")]
+    [Migration("20231227125839_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,12 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
+                    b.Property<string>("OperationsPlan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductCode")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("StartedOn")
                         .HasColumnType("datetime2");
 
@@ -53,6 +59,32 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Processes");
+                });
+
+            modelBuilder.Entity("ProcessingMachines.Domain.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppliedOperations")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductCode")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Manufacturing.Common.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProcessingMachines.Application.Commands.CreateProcessCommand;
 using ProcessingMachines.Application.Commands.StartProcessCommand;
@@ -32,9 +33,9 @@ public class ProcessesController : ControllerBase
     }
 
     [HttpPut("startProcess/{id}")]
-    public async Task<IActionResult> StartProcessAsync(int id)
+    public async Task<IActionResult> StartProcessAsync(int id, ProductCode productCode)
     {
-        var result = await mediator.Send(new StartProcessCommand(id));
+        var result = await mediator.Send(new StartProcessCommand(id, productCode));
         return Ok(result);
     }
 }

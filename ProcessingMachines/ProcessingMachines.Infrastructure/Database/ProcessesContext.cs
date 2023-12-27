@@ -17,9 +17,12 @@ public class ProcessesContext : DbContext
 
     public DbSet<Process>? Processes { get; set; }
 
+    public DbSet<Product>? Products { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ProcessEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }

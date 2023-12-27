@@ -1,5 +1,6 @@
 ﻿using Manufacturing.Common.Domain.Entities;
 using ProcessingMachines.Domain.BusinessRules;
+using ProcessingMachines.Domain.Entities.ProcessingOperations;
 
 namespace ProcessingMachines.Domain.Entities;
 
@@ -21,6 +22,12 @@ public class Process : Entity
 
     public DateTime? CompletedOn { get; set; }
 
+    public ProductCode? ProductCode { get; set; }
+
+    public int? ProductId { get; set; }
+
+    public IEnumerable<ProcessingOperation>? OperationsPlan { get; set; }
+
     public static Process Create(int materialId)
     {
         var process = new Process(materialId);
@@ -31,16 +38,25 @@ public class Process : Entity
     public void StartExecution()
     {
         CheckRule(new ProcessMustBeReadyToExecuteRule(State));
+        CheckRule(new ProcessMustHaveOperationsPlanRule(OperationsPlan));
 
         State = ProcessState.InProgress;
         StartedOn = DateTime.UtcNow;
     }
 
-    public void Complete()
+    public void Complete(Product product)
     {
         CheckRule(new ProcessMustBeInProgressRule(State));
 
         State = ProcessState.Completed;
         CompletedOn = DateTime.UtcNow;
+
+        ProductId = product.Id;
+    }
+
+    public void PlanProduction(ProductCode productCode, IEnumerable<ProcessingOperation> plan)
+    {
+        ProductCode = productCode;
+        OperationsPlan = plan;
     }
 }

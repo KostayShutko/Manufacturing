@@ -25,14 +25,20 @@ public abstract class BaseCommand<TEntity>
 
     protected async Task<TEntity> SaveChangesAsync(TEntity entity)
     {
+        return await SaveChangesAsync<TEntity>(entity);
+    }
+
+    protected async Task<T> SaveChangesAsync<T>(T entity)
+        where T : Entity
+    {
         if (entity.IsNew())
         {
-            var addedEntity = await unitOfWork.Repository<TEntity>().AddAsync(entity);
+            var addedEntity = await unitOfWork.Repository<T>().AddAsync(entity);
             await unitOfWork.SaveChangesAsync();
             return addedEntity;
         }
 
-        unitOfWork.Repository<TEntity>().Update(entity);
+        unitOfWork.Repository<T>().Update(entity);
         await unitOfWork.SaveChangesAsync();
         return entity;
     }
