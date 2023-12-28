@@ -22,9 +22,9 @@ public class Process : Entity
 
     public DateTime? CompletedOn { get; set; }
 
-    public ProductCode? ProductCode { get; set; }
+    public ProductCode ProductCode { get; set; }
 
-    public int? ProductId { get; set; }
+    public Product? Product { get; set; }
 
     public IEnumerable<ProcessingOperation>? OperationsPlan { get; set; }
 
@@ -44,14 +44,13 @@ public class Process : Entity
         StartedOn = DateTime.UtcNow;
     }
 
-    public void Complete(Product product)
+    public void Complete()
     {
         CheckRule(new ProcessMustBeInProgressRule(State));
+        CheckRule(new ProductMustHaveAppliedOperationsRule(Product?.AppliedOperations));
 
         State = ProcessState.Completed;
         CompletedOn = DateTime.UtcNow;
-
-        ProductId = product.Id;
     }
 
     public void PlanProduction(ProductCode productCode, IEnumerable<ProcessingOperation> plan)

@@ -14,6 +14,6 @@ public class ProcessProfile : Profile
     {
         CreateMap<Process, ProcessDto>();
         CreateMap<MaterialTransportedEvent, CreateProcessCommand>();
-        CreateMap<ProcessCreatedEvent, StartProcessCommand>();
+        CreateMap<StartProcessCommandEvent, StartProcessCommand>();
     }
 }

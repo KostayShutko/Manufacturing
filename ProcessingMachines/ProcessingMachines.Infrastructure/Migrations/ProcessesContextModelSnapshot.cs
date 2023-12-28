@@ -74,6 +74,12 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProcessId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductCode")
                         .HasColumnType("int");
 
@@ -82,7 +88,26 @@ namespace ProcessingMachines.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProcessId")
+                        .IsUnique();
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ProcessingMachines.Domain.Entities.Product", b =>
+                {
+                    b.HasOne("ProcessingMachines.Domain.Entities.Process", "Process")
+                        .WithOne("Product")
+                        .HasForeignKey("ProcessingMachines.Domain.Entities.Product", "ProcessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Process");
+                });
+
+            modelBuilder.Entity("ProcessingMachines.Domain.Entities.Process", b =>
+                {
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

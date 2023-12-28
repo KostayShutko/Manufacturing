@@ -12,9 +12,9 @@ namespace ProcessingMachines.Infrastructure;
 public static class InfrastructureServicesRegistration
 {
     public static IServiceCollection AddInfrastructureServices(
-            this IServiceCollection services,
-            IConfiguration configuration,
-            Type[] consumers)
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Type[] consumers)
     {
         services.AddMassTransitBus(configuration, consumers);
         services.AddTransient<IEventPublisher, EventPublisher>();

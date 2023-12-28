@@ -15,5 +15,10 @@ public class ProcessEntityTypeConfiguration : IEntityTypeConfiguration<Process>
         builder
             .Property(process => process.OperationsPlan)
             .HasConversion(new EnumListConverter<ProcessingOperation>());
+
+        builder
+            .HasOne(process => process.Product)
+            .WithOne(product => product.Process)
+            .HasForeignKey<Product>(product => product.ProcessId);
     }
 }

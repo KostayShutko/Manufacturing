@@ -2,9 +2,9 @@
 
 namespace ProcessingMachines.Domain.Entities.ProcessingMachines;
 
-public class ProcessingMachinesScheduler
+public class ProcessingMachinesScheduler : IProcessingMachinesScheduler
 {
-    public BaseProcessingMachine GetMachine(Process process)
+    public IProcessingMachine GetMachine(Process process)
     {
         switch (process.ProductCode)
         {

@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Manufacturing.Common\Manufacturing.Common.csproj" />
     <ProjectReference Include="..\ProcessingMachines.Application\ProcessingMachines.Application.csproj" />
+    <ProjectReference Include="..\ProcessingMachines.Domain\ProcessingMachines.Domain.csproj" />
     <ProjectReference Include="..\ProcessingMachines.Infrastructure\ProcessingMachines.Infrastructure.csproj" />
   </ItemGroup>
 

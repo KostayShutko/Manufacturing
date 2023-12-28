@@ -1,5 +1,6 @@
 ﻿using Manufacturing.Common.API.Middlewares;
 using ProcessingMachines.Application;
+using ProcessingMachines.Domain;
 using ProcessingMachines.Infrastructure;
 
 namespace ProcessingMachines.API;
@@ -20,6 +21,7 @@ public class Startup
         services.AddSwaggerGen();
 
         services.AddApplicationServices();
+        services.AddDomainServices();
         services.AddInfrastructureServices(Configuration, ApplicationServicesRegistration.GetConsumers());
 
         services.AddScoped<ExceptionHandlingMiddleware>();

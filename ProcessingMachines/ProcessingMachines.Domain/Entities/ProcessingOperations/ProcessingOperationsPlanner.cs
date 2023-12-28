@@ -2,7 +2,7 @@
 
 namespace ProcessingMachines.Domain.Entities.ProcessingOperations;
 
-public class ProcessingOperationsPlanner
+public class ProcessingOperationsPlanner : IProcessingOperationsPlanner
 {
     public IEnumerable<ProcessingOperation> GetProcessingOperationsPlan(ProductCode productCode)
     {

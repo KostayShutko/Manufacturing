@@ -26,7 +26,7 @@ public static class ApplicationServicesRegistration
     public static Type[] GetConsumers() => 
         new Type[] 
         { 
-            typeof(MaterialTransportedConsumer), 
-            typeof(ProcessCreatedConsumer) 
+            typeof(MaterialTransportedConsumer),
+            typeof(StartProcessConsumer)
         };
 }
