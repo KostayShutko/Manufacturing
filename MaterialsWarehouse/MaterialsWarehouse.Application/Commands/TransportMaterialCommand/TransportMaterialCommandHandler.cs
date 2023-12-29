@@ -26,7 +26,7 @@ namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand
 
             await SaveChangesAsync(material);
 
-            await eventPublisher.Publish(new MaterialTransportedEvent(material.Id));
+            await eventPublisher.Publish(new MaterialTransportedEvent(material.Id, 0));
 
             return ResponseResult.CreateSuccess();
         }

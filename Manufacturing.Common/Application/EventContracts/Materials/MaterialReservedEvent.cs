@@ -2,7 +2,8 @@
 {
     public class MaterialReservedEvent : BaseEvent
     {
-        public MaterialReservedEvent(int materialId)
+        public MaterialReservedEvent(int materialId, int workflowId)
+            : base(workflowId)
         {
             MaterialId = materialId;
         }

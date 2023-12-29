@@ -77,7 +77,7 @@ public class StartProcessCommandHandler : BaseCommand<Process>, IRequestHandler<
 
     private async Task PublishProductProducedEvent(Product product)
     {
-        var productProducedEvent = new ProductProducedEvent(product.ProductCode);
+        var productProducedEvent = new ProductProducedEvent(product.ProductCode, 0);
 
         await eventPublisher.Publish(productProducedEvent);
     }

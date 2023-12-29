@@ -2,5 +2,8 @@
 {
     public class MaterialReservationFailedEvent : BaseEvent
     {
+        public MaterialReservationFailedEvent(int workflowId) : base(workflowId)
+        {
+        }
     }
 }

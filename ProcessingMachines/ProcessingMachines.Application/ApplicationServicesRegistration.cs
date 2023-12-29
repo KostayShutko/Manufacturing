@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using Manufacturing.Common.Application.Behaviours;
-using MediatR;
+﻿using Manufacturing.Common.Application.Configurations;
 using Microsoft.Extensions.DependencyInjection;
 using ProcessingMachines.Application.Consumers;
 using System.Reflection;
@@ -14,11 +12,7 @@ public static class ApplicationServicesRegistration
         var executingAssembly = Assembly.GetExecutingAssembly();
 
         services.AddAutoMapper(executingAssembly);
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(executingAssembly));
-
-        services.AddValidatorsFromAssembly(executingAssembly, includeInternalTypes: true);
-
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddMediatRConfiguration(executingAssembly);
 
         return services;
     }

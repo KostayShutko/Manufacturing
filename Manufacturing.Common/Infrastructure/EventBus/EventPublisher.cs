@@ -12,6 +12,9 @@ namespace Manufacturing.Common.Infrastructure.EventBus
         }
 
         public async Task Publish<TMessage>(TMessage eventMessage)
-            => await publisher.Publish(eventMessage);
+        {
+            using var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            await publisher.Publish(eventMessage, cancellationToken.Token);
+        }
     }
 }

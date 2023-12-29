@@ -7,6 +7,8 @@ namespace Manufacturing.Common.Domain.Entities
     {
         public int Id { get; set; }
 
+        public int WorkflowId { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime UpdatedOn { get; set; }

@@ -25,11 +25,11 @@ namespace MaterialsWarehouse.Application.Consumers
             if (result.IsSuccessfull && result is ResponseResult<int> responseResult)
             {
                 var materialId = responseResult.Data;
-                await eventPublisher.Publish(new MaterialReservedEvent(materialId));
+                await eventPublisher.Publish(new MaterialReservedEvent(materialId, context.Message.WorkflowId));
             }
             else
             {
-                await eventPublisher.Publish(new MaterialReservationFailedEvent());
+                await eventPublisher.Publish(new MaterialReservationFailedEvent(context.Message.WorkflowId));
             }
         }
     }
