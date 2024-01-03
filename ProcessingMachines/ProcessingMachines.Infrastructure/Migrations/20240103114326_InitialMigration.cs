@@ -21,6 +21,7 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     CompletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProductCode = table.Column<int>(type: "int", nullable: false),
                     OperationsPlan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkflowId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -39,6 +40,7 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     MaterialId = table.Column<int>(type: "int", nullable: false),
                     ProcessId = table.Column<int>(type: "int", nullable: false),
                     AppliedOperations = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkflowId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

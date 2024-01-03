@@ -12,7 +12,7 @@ using ProcessingMachines.Infrastructure.Database;
 namespace ProcessingMachines.Infrastructure.Migrations
 {
     [DbContext(typeof(ProcessesContext))]
-    [Migration("20231228142948_InitialMigration")]
+    [Migration("20240103114326_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,9 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("WorkflowId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Processes");
@@ -87,6 +90,9 @@ namespace ProcessingMachines.Infrastructure.Migrations
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("WorkflowId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

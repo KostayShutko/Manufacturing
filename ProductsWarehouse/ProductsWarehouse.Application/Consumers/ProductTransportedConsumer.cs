@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Manufacturing.Common.Application.Consumers;
-using Manufacturing.Common.Application.EventContracts.Products;
+using Manufacturing.Common.Application.EventContracts.Transportations;
 using MassTransit;
 using MediatR;
 using ProductsWarehouse.Application.Commands.PlaceProductCommand;

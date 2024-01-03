@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Manufacturing.Common.Application.EventContracts.Materials;
+using Manufacturing.Common.Application.EventContracts.Transportations;
 using Manufacturing.Common.Application.EventContracts.Processes;
 using ProcessingMachines.Application.Commands.CreateProcessCommand;
 using ProcessingMachines.Application.Commands.StartProcessCommand;

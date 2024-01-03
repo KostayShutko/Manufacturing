@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Manufacturing.Common.Application.Consumers;
 using Manufacturing.Common.Application.EventContracts.Materials;
-using Manufacturing.Common.Application.ResponseResults;
 using Manufacturing.Common.Infrastructure.EventBus;
 using MassTransit;
 using MaterialsWarehouse.Application.Commands.ReserveMaterialCommand;
@@ -22,12 +21,7 @@ namespace MaterialsWarehouse.Application.Consumers
         {
             var result = await HandleMessage(context);
 
-            if (result.IsSuccessfull && result is ResponseResult<int> responseResult)
-            {
-                var materialId = responseResult.Data;
-                await eventPublisher.Publish(new MaterialReservedEvent(materialId, context.Message.WorkflowId));
-            }
-            else
+            if (!result.IsSuccessfull)
             {
                 await eventPublisher.Publish(new MaterialReservationFailedEvent(context.Message.WorkflowId));
             }

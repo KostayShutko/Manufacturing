@@ -1,5 +1,7 @@
 ﻿using Manufacturing.Common.Application.Commands;
+using Manufacturing.Common.Application.EventContracts.Materials;
 using Manufacturing.Common.Application.ResponseResults;
+using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Application.Specifications;
 using MaterialsWarehouse.Domain.Entities;
@@ -10,9 +12,12 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
 {
     public class ReserveMaterialCommandHandler : BaseCommand<Material>, IRequestHandler<ReserveMaterialCommand, ResponseResult<int>>
     {
-        public ReserveMaterialCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IEventPublisher eventPublisher;
+
+        public ReserveMaterialCommandHandler(IUnitOfWork unitOfWork, IEventPublisher eventPublisher)
             :base(unitOfWork)
         {
+            this.eventPublisher = eventPublisher;
         }
 
         public async Task<ResponseResult<int>> Handle(ReserveMaterialCommand command, CancellationToken cancellationToken)
@@ -27,6 +32,8 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
             material.Reserve();
 
             await SaveChangesAsync(material);
+
+            await eventPublisher.Publish(new MaterialReservedEvent(material.Id, material.WorkflowId));
 
             return ResponseResult.CreateSuccess(material.Id);
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Manufacturing.Common.Application.EventContracts.Products;
+using Manufacturing.Common.Application.EventContracts.Transportations;
 using ProductsWarehouse.Application.Commands.PlaceProductCommand;
 using ProductsWarehouse.Application.Commands.ReserveProductCommand;
 using ProductsWarehouse.Application.DTOs;

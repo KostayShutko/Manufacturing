@@ -2,12 +2,12 @@
 using Manufacturing.Common.Application.Consumers;
 using Manufacturing.Common.Application.EventContracts.Transportations;
 using MassTransit;
+using MaterialsWarehouse.Application.Commands.TransportMaterialCommand;
 using MediatR;
-using ProcessingMachines.Application.Commands.CreateProcessCommand;
 
-namespace ProcessingMachines.Application.Consumers;
+namespace MaterialsWarehouse.Application.Consumers;
 
-public  class MaterialTransportedConsumer : BaseConsumer<MaterialTransportedEvent, CreateProcessCommand>, IConsumer<MaterialTransportedEvent>
+public class MaterialTransportedConsumer : BaseConsumer<MaterialTransportedEvent, TransportMaterialCommand>, IConsumer<MaterialTransportedEvent>
 {
     public MaterialTransportedConsumer(IMediator mediator, IMapper mapper) : base(mediator, mapper)
     {
