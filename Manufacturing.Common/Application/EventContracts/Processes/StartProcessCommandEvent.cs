@@ -2,7 +2,7 @@
 
 public class StartProcessCommandEvent : BaseEvent
 {
-    public StartProcessCommandEvent(int workflowId) : base(workflowId)
+    public StartProcessCommandEvent(Guid workflowId) : base(workflowId)
     {
     }
 }

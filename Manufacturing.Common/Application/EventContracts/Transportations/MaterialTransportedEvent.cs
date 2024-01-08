@@ -2,7 +2,7 @@
 
 public class MaterialTransportedEvent : BaseEvent
 {
-    public MaterialTransportedEvent(int materialId, int workflowId)
+    public MaterialTransportedEvent(int materialId, Guid workflowId)
         : base(workflowId)
     {
         MaterialId = materialId;

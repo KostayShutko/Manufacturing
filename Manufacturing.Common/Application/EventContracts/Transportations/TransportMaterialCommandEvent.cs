@@ -2,7 +2,7 @@
 
 public class TransportMaterialCommandEvent : BaseEvent
 {
-    public TransportMaterialCommandEvent(int materialId, int workflowId)
+    public TransportMaterialCommandEvent(int materialId, Guid workflowId)
         : base(workflowId)
     {
         MaterialId = materialId;

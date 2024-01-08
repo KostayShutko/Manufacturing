@@ -4,7 +4,7 @@ namespace Manufacturing.Common.Application.EventContracts.Transportations;
 
 public class ProductTransportedEvent : BaseEvent
 {
-    public ProductTransportedEvent(ProductCode productCode, int workflowId)
+    public ProductTransportedEvent(ProductCode productCode, Guid workflowId)
         : base(workflowId)
     {
         ProductCode = productCode;

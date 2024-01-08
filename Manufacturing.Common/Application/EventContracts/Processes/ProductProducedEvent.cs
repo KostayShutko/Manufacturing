@@ -4,7 +4,7 @@ namespace Manufacturing.Common.Application.EventContracts.Processes;
 
 public class ProductProducedEvent : BaseEvent
 {
-    public ProductProducedEvent(ProductCode productCode, int workflowId)
+    public ProductProducedEvent(ProductCode productCode, Guid workflowId)
         : base(workflowId)
     {
         ProductCode = productCode;

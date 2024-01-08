@@ -2,7 +2,7 @@
 {
     public class MaterialReservationFailedEvent : BaseEvent
     {
-        public MaterialReservationFailedEvent(int workflowId) : base(workflowId)
+        public MaterialReservationFailedEvent(Guid workflowId) : base(workflowId)
         {
         }
     }

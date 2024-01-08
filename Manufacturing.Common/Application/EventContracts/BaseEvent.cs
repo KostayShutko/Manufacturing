@@ -2,11 +2,11 @@
 {
     public class BaseEvent
     {
-        public BaseEvent(int workflowId)
+        public BaseEvent(Guid workflowId)
         {
             WorkflowId = workflowId;
         }
 
-        public int WorkflowId { get; set; }
+        public Guid WorkflowId { get; set; }
     }
 }

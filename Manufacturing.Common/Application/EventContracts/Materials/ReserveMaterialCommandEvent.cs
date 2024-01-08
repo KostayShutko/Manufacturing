@@ -2,7 +2,7 @@
 {
     public class ReserveMaterialCommandEvent : BaseEvent
     {
-        public ReserveMaterialCommandEvent(int workflowId) : base(workflowId)
+        public ReserveMaterialCommandEvent(Guid workflowId) : base(workflowId)
         {
         }
     }

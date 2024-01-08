@@ -1,9 +1,8 @@
 ﻿using Manufacturing.Common.Application.Configurations;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Transportations.Application.Consumers;
 
-namespace Transportations.Application;
+namespace WorkflowOrchestrator.Application;
 
 public static class ApplicationServicesRegistration
 {
@@ -20,7 +19,5 @@ public static class ApplicationServicesRegistration
     public static Type[] GetConsumers() =>
         new Type[]
         {
-            typeof(TransportMaterialConsumer),
-            typeof(TransportProductConsumer)
         };
 }

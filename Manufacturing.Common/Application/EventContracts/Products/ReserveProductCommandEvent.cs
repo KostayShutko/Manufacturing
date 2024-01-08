@@ -2,7 +2,7 @@
 
 public class ReserveProductCommandEvent : BaseEvent
 {
-    public ReserveProductCommandEvent(int workflowId) : base(workflowId)
+    public ReserveProductCommandEvent(Guid workflowId) : base(workflowId)
     {
     }
 }
