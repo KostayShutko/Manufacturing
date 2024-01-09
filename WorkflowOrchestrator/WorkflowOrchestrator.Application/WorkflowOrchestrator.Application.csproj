@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Manufacturing.Common\Manufacturing.Common.csproj" />
+    <ProjectReference Include="..\WorkflowOrchestrator.Domain\WorkflowOrchestrator.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowOrchestrator.API", "WorkflowOrchestrator.API\WorkflowOrchestrator.API.csproj", "{7DE9161C-87EE-40E5-863A-4500B300B82A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowOrchestrator.API", "WorkflowOrchestrator.API\WorkflowOrchestrator.API.csproj", "{7DE9161C-87EE-40E5-863A-4500B300B82A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manufacturing.Common", "..\Manufacturing.Common\Manufacturing.Common.csproj", "{C1D5689D-3AD7-4961-8D69-CDC27291758C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowOrchestrator.Application", "WorkflowOrchestrator.Application\WorkflowOrchestrator.Application.csproj", "{BF884287-AC87-4042-970D-26587D8FC48B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowOrchestrator.Application", "WorkflowOrchestrator.Application\WorkflowOrchestrator.Application.csproj", "{BF884287-AC87-4042-970D-26587D8FC48B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowOrchestrator.Domain", "WorkflowOrchestrator.Domain\WorkflowOrchestrator.Domain.csproj", "{F92126D8-6011-4E2A-9E29-53471583F979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowOrchestrator.Domain", "WorkflowOrchestrator.Domain\WorkflowOrchestrator.Domain.csproj", "{F92126D8-6011-4E2A-9E29-53471583F979}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowOrchestrator.Infrastructure", "WorkflowOrchestrator.Infrastructure\WorkflowOrchestrator.Infrastructure.csproj", "{92B356BD-01A4-4EF6-AC08-8581C4C1C2F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkflowOrchestrator.Infrastructure", "WorkflowOrchestrator.Infrastructure\WorkflowOrchestrator.Infrastructure.csproj", "{92B356BD-01A4-4EF6-AC08-8581C4C1C2F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{579923B6-8228-4B2B-838D-706A67FEBFB0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaterialsWarehouse.Infrastructure.Migrations
 {
     [DbContext(typeof(MaterialsContext))]
-    [Migration("20240103115415_InitialMigration")]
+    [Migration("20240109100045_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,8 @@ namespace MaterialsWarehouse.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WorkflowId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("WorkflowId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

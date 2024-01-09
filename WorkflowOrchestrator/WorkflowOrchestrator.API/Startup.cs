@@ -1,5 +1,6 @@
 ﻿using Manufacturing.Common.API.Middlewares;
 using WorkflowOrchestrator.Application;
+using WorkflowOrchestrator.Application.Workflows;
 using WorkflowOrchestrator.Infrastructure;
 
 namespace WorkflowOrchestrator.API;
@@ -20,7 +21,7 @@ public class Startup
         services.AddSwaggerGen();
 
         services.AddApplicationServices();
-        services.AddInfrastructureServices(Configuration, ApplicationServicesRegistration.GetConsumers());
+        services.AddInfrastructureServices(Configuration, ApplicationServicesRegistration.StateMachineConfigurator);
 
         services.AddScoped<ExceptionHandlingMiddleware>();
     }

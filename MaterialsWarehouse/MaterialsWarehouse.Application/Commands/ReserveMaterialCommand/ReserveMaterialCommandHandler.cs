@@ -30,6 +30,7 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
             }
 
             material.Reserve();
+            material.SetWorkflow(command.WorkflowId);
 
             await SaveChangesAsync(material);
 

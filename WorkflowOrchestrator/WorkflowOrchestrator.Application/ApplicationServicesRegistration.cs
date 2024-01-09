@@ -1,6 +1,9 @@
 ﻿using Manufacturing.Common.Application.Configurations;
+using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using WorkflowOrchestrator.Application.Workflows;
+using WorkflowOrchestrator.Domain.Entities;
 
 namespace WorkflowOrchestrator.Application;
 
@@ -16,8 +19,10 @@ public static class ApplicationServicesRegistration
         return services;
     }
 
-    public static Type[] GetConsumers() =>
-        new Type[]
-        {
-        };
+    public static void StateMachineConfigurator(IBusRegistrationConfigurator busConfigurator)
+    {
+        busConfigurator
+            .AddSagaStateMachine<ProductProductionWorkflow, ProductProductionWorkflowState>()
+            .InMemoryRepository();
+    }
 }

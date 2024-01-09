@@ -5,5 +5,6 @@ namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
 {
     public class ReserveMaterialCommand : IRequest<ResponseResult<int>>
     {
+        public Guid WorkflowId { get; set; }
     }
 }

@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["WorkflowOrchestrator.API/WorkflowOrchestrator.API.csproj", "WorkflowOrchestrator.API/"]
-RUN dotnet restore "WorkflowOrchestrator.API/WorkflowOrchestrator.API.csproj"
-COPY . .
-WORKDIR "/src/WorkflowOrchestrator.API"
+COPY ["WorkflowOrchestrator/WorkflowOrchestrator.API/WorkflowOrchestrator.API.csproj", "WorkflowOrchestrator/WorkflowOrchestrator.API/"]
+RUN dotnet restore "WorkflowOrchestrator/WorkflowOrchestrator.API/WorkflowOrchestrator.API.csproj"
+
+COPY ./WorkflowOrchestrator/ ./WorkflowOrchestrator/
+COPY ./Manufacturing.Common/ ./Manufacturing.Common/
+
+WORKDIR "WorkflowOrchestrator/WorkflowOrchestrator.API"
 RUN dotnet build "WorkflowOrchestrator.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
