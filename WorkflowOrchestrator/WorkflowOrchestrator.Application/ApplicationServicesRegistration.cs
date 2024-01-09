@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using WorkflowOrchestrator.Application.Workflows;
 using WorkflowOrchestrator.Domain.Entities;
+using WorkflowOrchestrator.Infrastructure.Database;
 
 namespace WorkflowOrchestrator.Application;
 
@@ -23,6 +24,10 @@ public static class ApplicationServicesRegistration
     {
         busConfigurator
             .AddSagaStateMachine<ProductProductionWorkflow, ProductProductionWorkflowState>()
-            .InMemoryRepository();
+            .EntityFrameworkRepository(r =>
+            {
+                r.ExistingDbContext<WorkflowsContext>();
+                r.UseSqlServer();
+            });
     }
 }

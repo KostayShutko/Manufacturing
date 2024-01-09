@@ -17,6 +17,11 @@ namespace MaterialsWarehouse.Application
             return services;
         }
 
-        public static Type[] GetConsumers() => new Type[] { typeof(ReserveMaterialConsumer) };
+        public static Type[] GetConsumers() => 
+            new Type[] 
+            { 
+                typeof(ReserveMaterialConsumer),
+                typeof(MaterialTransportedConsumer)
+            };
     }
 }

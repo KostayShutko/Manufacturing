@@ -16,17 +16,26 @@ namespace Manufacturing.Common.Infrastructure.Configurations
             {
                 consumers.ForEach(consumer => busConfigurator.AddConsumer(consumer));
 
-                busConfigurator.UsingRabbitMq((context, busFactoryConfigurator) =>
-                {
-                    var rabbitMqConfiguration = configuration.GetConfigurationModel<RabbitMqConfiguration>(nameof(RabbitMqConfiguration));
-                    busFactoryConfigurator.Host(rabbitMqConfiguration.HostName, rabbitMqConfiguration.Port, "/", hostConfigurator =>
-                    {
-                        hostConfigurator.Username(rabbitMqConfiguration.UserName);
-                        hostConfigurator.Password(rabbitMqConfiguration.Password);
-                    });
-                    busFactoryConfigurator.ConfigureEndpoints(context);
-                });
+                busConfigurator.AddMassTransitRabbitMq(configuration);
             });
+        }
+
+        public static IBusRegistrationConfigurator AddMassTransitRabbitMq(
+            this IBusRegistrationConfigurator busConfigurator,
+            IConfiguration configuration)
+        {
+            busConfigurator.UsingRabbitMq((context, busFactoryConfigurator) =>
+            {
+                var rabbitMqConfiguration = configuration.GetConfigurationModel<RabbitMqConfiguration>(nameof(RabbitMqConfiguration));
+                busFactoryConfigurator.Host(rabbitMqConfiguration.HostName, rabbitMqConfiguration.Port, "/", hostConfigurator =>
+                {
+                    hostConfigurator.Username(rabbitMqConfiguration.UserName);
+                    hostConfigurator.Password(rabbitMqConfiguration.Password);
+                });
+                busFactoryConfigurator.ConfigureEndpoints(context);
+            });
+
+            return busConfigurator;
         }
     }
 }

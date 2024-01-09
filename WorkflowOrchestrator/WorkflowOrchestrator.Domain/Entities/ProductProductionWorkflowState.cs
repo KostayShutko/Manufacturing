@@ -6,7 +6,15 @@ public class ProductProductionWorkflowState : SagaStateMachineInstance, ISagaVer
 {
     public Guid CorrelationId { get; set; }
 
+    public Guid WorkflowId { get; set; }
+
     public string CurrentState { get; set; }
 
+    public int ReservationStatus { get; set; }
+
     public int Version { get; set; }
+
+    public int MaterialId { get; set; }
+
+    public int ProductId { get; set; }
 }

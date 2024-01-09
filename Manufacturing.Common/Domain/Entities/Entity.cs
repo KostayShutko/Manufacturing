@@ -21,6 +21,11 @@ namespace Manufacturing.Common.Domain.Entities
             }
         }
 
+        public void AssignWorkflow(Guid workflowId)
+        {
+            WorkflowId = workflowId;
+        }
+
         public bool IsNew() => Id == 0;
     }
 }

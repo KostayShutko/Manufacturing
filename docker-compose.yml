@@ -51,6 +51,20 @@ services:
         - sqlserver
     networks: 
       - manufacturing-network
+      
+  workfloworchestrator:
+    container_name: workfloworchestrator
+    ports:
+        - 5005:80
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Production
+    build:
+        context: .
+        dockerfile: WorkflowOrchestrator/WorkflowOrchestrator.API/Dockerfile
+    depends_on:
+        - sqlserver
+    networks: 
+      - manufacturing-network
 
 networks:
   manufacturing-network:
