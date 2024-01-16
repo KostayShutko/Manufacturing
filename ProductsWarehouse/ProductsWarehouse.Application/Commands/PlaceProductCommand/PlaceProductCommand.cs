@@ -6,13 +6,16 @@ namespace ProductsWarehouse.Application.Commands.PlaceProductCommand;
 
 public class PlaceProductCommand : IRequest<ResponseResult>
 {
-    public PlaceProductCommand(int workflowId, ProductCode productCode)
+    public PlaceProductCommand(Guid workflowId, ProductCode productCode, int productId)
     {
         WorkflowId = workflowId;
+        ProductId = productId;
         ProductCode = productCode;
     }
 
-    public int WorkflowId { get; set; }
+    public Guid WorkflowId { get; set; }
+
+    public int ProductId { get; set; }
 
     public ProductCode ProductCode { get; }
 }

@@ -5,10 +5,9 @@ namespace ProductsWarehouse.Domain.Entities;
 
 public class Product : Entity
 {
-    public Product(int workflowId)
+    public Product()
     {
         State = ProductState.Initial;
-        WorkflowId = workflowId;
     }
 
     public ProductState State { get; set; }
@@ -19,9 +18,11 @@ public class Product : Entity
 
     public DateTime? ShippedOn { get; set; }
 
-    public static Product Create(int workflowId)
+    public static Product Create(Guid workflowId)
     {
-        var product = new Product(workflowId);
+        var product = new Product();
+
+        product.AssignWorkflow(workflowId);
 
         return product;
     }

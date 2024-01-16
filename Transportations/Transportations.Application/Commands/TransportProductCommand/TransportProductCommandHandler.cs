@@ -24,7 +24,7 @@ public class TransportProductCommandHandler : BaseCommand<Transportation>, IRequ
 
         await SaveChangesAsync(transportation);
 
-        await eventPublisher.Publish(new ProductTransportedEvent(command.ProductCode, command.WorkflowId));
+        await eventPublisher.Publish(new ProductTransportedEvent(command.ProductId, command.ProductCode, command.WorkflowId));
 
         return ResponseResult.CreateSuccess();
     }

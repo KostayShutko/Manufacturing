@@ -4,16 +4,17 @@ namespace Transportations.Domain.Entities;
 
 public class Transportation : Entity
 {
-    public Transportation(Position from, Position to, int workflowId)
+    public Transportation(Position from, Position to)
     {
         From = from;
         To = to;
-        WorkflowId = workflowId;
     }
 
-    public static Transportation Create(Position from, Position to, int workflowId)
+    public static Transportation Create(Position from, Position to, Guid workflowId)
     {
-        var transportation = new Transportation(from, to, workflowId);
+        var transportation = new Transportation(from, to);
+
+        transportation.AssignWorkflow(workflowId);
 
         return transportation;
     }

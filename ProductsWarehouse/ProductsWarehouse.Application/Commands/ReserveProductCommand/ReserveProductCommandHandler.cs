@@ -26,7 +26,7 @@ public class ReserveProductCommandHandler : BaseCommand<Product>, IRequestHandle
 
         var addedProduct = await SaveChangesAsync(product);
 
-        await eventPublisher.Publish(new ProductReservedEvent(command.WorkflowId));
+        await eventPublisher.Publish(new ProductReservedEvent(product.Id, product.WorkflowId));
 
         return ResponseResult.CreateSuccess(addedProduct.Id);
     }

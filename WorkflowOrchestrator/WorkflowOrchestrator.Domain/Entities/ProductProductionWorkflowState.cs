@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Manufacturing.Common.Domain.Entities;
+using MassTransit;
 
 namespace WorkflowOrchestrator.Domain.Entities;
 
@@ -17,4 +18,8 @@ public class ProductProductionWorkflowState : SagaStateMachineInstance, ISagaVer
     public int MaterialId { get; set; }
 
     public int ProductId { get; set; }
+
+    public int ProcessId { get; set; }
+
+    public ProductCode ProductCode { get; set; }
 }

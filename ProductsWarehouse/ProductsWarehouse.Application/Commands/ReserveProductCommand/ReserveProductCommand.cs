@@ -5,10 +5,10 @@ namespace ProductsWarehouse.Application.Commands.ReserveProductCommand;
 
 public class ReserveProductCommand : IRequest<ResponseResult<int>>
 {
-    public ReserveProductCommand(int workflowId)
+    public ReserveProductCommand(Guid workflowId)
     {
         WorkflowId = workflowId;
     }
 
-    public int WorkflowId { get; set; }
+    public Guid WorkflowId { get; set; }
 }

@@ -1,5 +1,4 @@
-﻿using Manufacturing.Common.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProcessingMachines.API.Requests;
 using ProcessingMachines.Application.Commands.CreateProcessCommand;
@@ -29,7 +28,7 @@ public class ProcessesController : ControllerBase
     [HttpPut("createProcess/{materialId}")]
     public async Task<IActionResult> CreateProcessAsync(int materialId)
     {
-        var result = await mediator.Send(new CreateProcessCommand(materialId));
+        var result = await mediator.Send(new CreateProcessCommand(materialId, Guid.NewGuid()));
         return Ok(result);
     }
 

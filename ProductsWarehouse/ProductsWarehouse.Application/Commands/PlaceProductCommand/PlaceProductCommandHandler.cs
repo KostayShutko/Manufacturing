@@ -5,7 +5,6 @@ using Manufacturing.Common.Application.Specifications;
 using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Repository;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using ProductsWarehouse.Domain.Entities;
 
 namespace ProductsWarehouse.Application.Commands.PlaceProductCommand;
@@ -22,8 +21,7 @@ public class PlaceProductCommandHandler : BaseCommand<Product>, IRequestHandler<
 
     public async Task<ResponseResult> Handle(PlaceProductCommand command, CancellationToken cancellationToken)
     {
-        var specification = new GetByWorkflowIdSpecification<Product>(command.WorkflowId);
-        var product = await FindBySpecification(specification).FirstOrDefaultAsync();
+        var product = await FindByIdAsync(command.ProductId);
 
         if (product == null)
         {

@@ -28,9 +28,11 @@ public class Process : Entity
 
     public IEnumerable<ProcessingOperation>? OperationsPlan { get; set; }
 
-    public static Process Create(int materialId)
+    public static Process Create(int materialId, Guid workflowId)
     {
         var process = new Process(materialId);
+
+        process.AssignWorkflow(workflowId);
 
         return process;
     }

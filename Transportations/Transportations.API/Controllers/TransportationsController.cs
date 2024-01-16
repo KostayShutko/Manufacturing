@@ -26,16 +26,16 @@ public class TransportationsController : ControllerBase
     }
 
     [HttpPut("transportMaterial")]
-    public async Task<IActionResult> TransportMaterialAsync(int workflowId, int materialId)
+    public async Task<IActionResult> TransportMaterialAsync(int materialId)
     {
-        var result = await mediator.Send(new TransportMaterialCommand(workflowId, materialId));
+        var result = await mediator.Send(new TransportMaterialCommand(Guid.NewGuid(), materialId));
         return Ok(result);
     }
 
     [HttpPut("transportProduct")]
-    public async Task<IActionResult> TransportProductAsync(int workflowId, ProductCode productCode)
+    public async Task<IActionResult> TransportProductAsync(int productId, ProductCode productCode)
     {
-        var result = await mediator.Send(new TransportProductCommand(workflowId, productCode));
+        var result = await mediator.Send(new TransportProductCommand(Guid.NewGuid(), productId, productCode));
         return Ok(result);
     }
 }

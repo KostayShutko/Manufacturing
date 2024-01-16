@@ -27,16 +27,16 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut("reserveProduct")]
-    public async Task<IActionResult> ReserveProductAsync(int workflowId)
+    public async Task<IActionResult> ReserveProductAsync()
     {
-        var result = await mediator.Send(new ReserveProductCommand(workflowId));
+        var result = await mediator.Send(new ReserveProductCommand(Guid.NewGuid()));
         return Ok(result);
     }
 
     [HttpPut("placeProduct")]
-    public async Task<IActionResult> PlaceProductAsync(int workflowId, ProductCode productCode)
+    public async Task<IActionResult> PlaceProductAsync(ProductCode productCode, int productId)
     {
-        var result = await mediator.Send(new PlaceProductCommand(workflowId, productCode));
+        var result = await mediator.Send(new PlaceProductCommand(Guid.NewGuid(), productCode, productId));
         return Ok(result);
     }
 

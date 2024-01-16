@@ -2,10 +2,6 @@
 
 public class ProductReservedEvent : BaseEvent
 {
-    public ProductReservedEvent(Guid workflowId) : base(workflowId)
-    {
-    }
-
     public ProductReservedEvent(int productId, Guid workflowId)
             : base(workflowId)
     {

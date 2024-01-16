@@ -4,11 +4,14 @@ namespace Manufacturing.Common.Application.EventContracts.Transportations;
 
 public class TransportProductCommandEvent : BaseEvent
 {
-    public TransportProductCommandEvent(ProductCode productCode, Guid workflowId)
+    public TransportProductCommandEvent(int productId, ProductCode productCode, Guid workflowId)
         : base(workflowId)
     {
+        ProductId = productId;
         ProductCode = productCode;
     }
+
+    public int ProductId { get; set; }
 
     public ProductCode ProductCode { get; set; }
 }
