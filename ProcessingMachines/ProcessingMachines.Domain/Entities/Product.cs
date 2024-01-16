@@ -28,6 +28,8 @@ public class Product : Entity
     {
         var product = new Product(process.ProductCode, process.MaterialId, process);
 
+        product.AssignWorkflow(process.WorkflowId);
+
         return product;
     }
 

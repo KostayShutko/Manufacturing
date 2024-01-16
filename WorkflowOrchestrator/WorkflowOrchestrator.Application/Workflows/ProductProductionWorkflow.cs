@@ -31,6 +31,7 @@ public class ProductProductionWorkflow : MassTransitStateMachine<ProductProducti
         Event(() => MaterialTransportedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
         Event(() => ProductTransportedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
         Event(() => ProductProducedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
+        Event(() => ProcessCreatedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
         Event(() => ProductPlacedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
 
         CompositeEvent(() => ReservationCompletedEvent,

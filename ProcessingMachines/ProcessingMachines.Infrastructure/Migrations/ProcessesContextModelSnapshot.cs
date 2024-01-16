@@ -54,8 +54,8 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WorkflowId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("WorkflowId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -89,8 +89,8 @@ namespace ProcessingMachines.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WorkflowId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("WorkflowId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

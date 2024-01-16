@@ -16,9 +16,12 @@ namespace WorkflowOrchestrator.Infrastructure.Migrations
                     CorrelationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     WorkflowId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CurrentState = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReservationStatus = table.Column<int>(type: "int", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false),
                     MaterialId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProcessId = table.Column<int>(type: "int", nullable: false),
+                    ProductCode = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

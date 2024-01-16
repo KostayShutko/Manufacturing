@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProductsWarehouse.Infrastructure.Database;
+using Transportations.Infrastructure.Database;
 
 #nullable disable
 
-namespace ProductsWarehouse.Infrastructure.Migrations
+namespace Transportations.Infrastructure.Migrations
 {
-    [DbContext(typeof(ProductsContext))]
-    [Migration("20231229124258_InitialMigration")]
+    [DbContext(typeof(TransportationsContext))]
+    [Migration("20240116174306_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace ProductsWarehouse.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ProductsWarehouse.Domain.Entities.Product", b =>
+            modelBuilder.Entity("Transportations.Domain.Entities.Transportation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,27 +35,21 @@ namespace ProductsWarehouse.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("PlacedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ProductCode")
+                    b.Property<int>("From")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("ShippedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("State")
+                    b.Property<int>("To")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WorkflowId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("WorkflowId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Transportations");
                 });
 #pragma warning restore 612, 618
         }

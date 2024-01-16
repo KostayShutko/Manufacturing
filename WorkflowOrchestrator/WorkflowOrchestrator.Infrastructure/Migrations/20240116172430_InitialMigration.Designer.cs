@@ -12,7 +12,7 @@ using WorkflowOrchestrator.Infrastructure.Database;
 namespace WorkflowOrchestrator.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkflowsContext))]
-    [Migration("20240109165640_InitialMigration")]
+    [Migration("20240116172430_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,16 @@ namespace WorkflowOrchestrator.Infrastructure.Migrations
                     b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProcessId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductCode")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationStatus")
                         .HasColumnType("int");
 
                     b.Property<int>("Version")

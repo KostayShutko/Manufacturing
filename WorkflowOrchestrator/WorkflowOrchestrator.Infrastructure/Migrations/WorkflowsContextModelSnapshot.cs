@@ -34,7 +34,16 @@ namespace WorkflowOrchestrator.Infrastructure.Migrations
                     b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProcessId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductCode")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationStatus")
                         .HasColumnType("int");
 
                     b.Property<int>("Version")
