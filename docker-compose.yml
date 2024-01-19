@@ -35,6 +35,7 @@ services:
         dockerfile: MaterialsWarehouse/MaterialsWarehouse.API/Dockerfile
     depends_on:
         - sqlserver
+        - rabbitmq
     networks: 
       - manufacturing-network
       
@@ -49,8 +50,39 @@ services:
         dockerfile: ProcessingMachines/ProcessingMachines.API/Dockerfile
     depends_on:
         - sqlserver
+        - rabbitmq
     networks: 
       - manufacturing-network
+      
+  transportations:
+    container_name: transportations
+    ports:
+        - 5002:80
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Production
+    build:
+        context: .
+        dockerfile: Transportations/Transportations.API/Dockerfile
+    depends_on:
+        - sqlserver
+        - rabbitmq
+    networks: 
+      - manufacturing-network
+      
+  productswarehouse:
+    container_name: productswarehouse
+    ports:
+        - 5003:80
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Production
+    build:
+        context: .
+        dockerfile: ProductsWarehouse/ProductsWarehouse.API/Dockerfile
+    depends_on:
+        - sqlserver
+        - rabbitmq
+    networks: 
+      - manufacturing-network    
       
   workfloworchestrator:
     container_name: workfloworchestrator
@@ -63,6 +95,7 @@ services:
         dockerfile: WorkflowOrchestrator/WorkflowOrchestrator.API/Dockerfile
     depends_on:
         - sqlserver
+        - rabbitmq
     networks: 
       - manufacturing-network
 
