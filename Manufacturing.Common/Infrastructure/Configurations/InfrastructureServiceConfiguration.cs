@@ -14,7 +14,10 @@ namespace Manufacturing.Common.Infrastructure.Configurations
         {
             return services.AddMassTransit(busConfigurator =>
             {
-                consumers.ForEach(consumer => busConfigurator.AddConsumer(consumer));
+                consumers.ForEach(consumer => 
+                    busConfigurator
+                        .AddConsumer(consumer)
+                        .Endpoint(x => x.InstanceId = consumer.ToString()));
 
                 busConfigurator.AddMassTransitRabbitMq(configuration);
             });

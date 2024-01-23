@@ -1,4 +1,5 @@
-﻿using Manufacturing.Common.Application.EventContracts.Materials;
+﻿using Manufacturing.Common.Application.EventContracts;
+using Manufacturing.Common.Application.EventContracts.Materials;
 using Manufacturing.Common.Application.EventContracts.Processes;
 using Manufacturing.Common.Application.EventContracts.Products;
 using Manufacturing.Common.Application.EventContracts.Transportations;
@@ -13,19 +14,20 @@ public class ProductProductionWorkflow : MassTransitStateMachine<ProductProducti
     public ProductProductionWorkflow()
     {
         DeclairEventsStep();
+
         WorkflowInitializationStep();
         ReservationStep();
         MaterialTransportationStep();
         ProcessingStep();
         ProductTransportationStep();
-        SetCompletedWhenFinalized();
+
+        HandleExecutionFailedEventStep();
     }
 
     private void DeclairEventsStep()
     {
         Event(() => ProductProductionWorkflowInitializationEvent,
             workflowEvent => workflowEvent.CorrelateById(context => context.Message.WorkflowId).SelectId(c => c.Message.WorkflowId));
-        // TODO correlate by workflow Id
         Event(() => MaterialReservedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
         Event(() => ProductReservedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
         Event(() => MaterialTransportedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
@@ -33,6 +35,7 @@ public class ProductProductionWorkflow : MassTransitStateMachine<ProductProducti
         Event(() => ProductProducedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
         Event(() => ProcessCreatedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
         Event(() => ProductPlacedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
+        Event(() => ExecutionFailedEvent, workflowEvent => workflowEvent.CorrelateById(c => c.Message.WorkflowId));
 
         CompositeEvent(() => ReservationCompletedEvent,
             state => state.ReservationStatus, MaterialReservedEvent, ProductReservedEvent);
@@ -106,6 +109,12 @@ public class ProductProductionWorkflow : MassTransitStateMachine<ProductProducti
                 .TransitionTo(ProductPlacedState));
     }
 
+    private void HandleExecutionFailedEventStep()
+    {
+        DuringAny(When(ExecutionFailedEvent)
+            .TransitionTo(WorkflowFailedState));
+    }
+
     public Event<ProductProductionWorkflowInitializationEvent> ProductProductionWorkflowInitializationEvent { get; set; }
 
     public Event<MaterialReservedEvent> MaterialReservedEvent { get; set; }
@@ -121,6 +130,8 @@ public class ProductProductionWorkflow : MassTransitStateMachine<ProductProducti
     public Event<ProductProducedEvent> ProductProducedEvent { get; set; }
 
     public Event<ProductPlacedEvent> ProductPlacedEvent { get; set; }
+
+    public Event<ExecutionFailedEvent> ExecutionFailedEvent { get; set; }
 
     public Event ReservationCompletedEvent { get; set; }
 
@@ -143,4 +154,6 @@ public class ProductProductionWorkflow : MassTransitStateMachine<ProductProducti
     public State ProductInTransportationState { get; set; }
 
     public State ProductPlacedState { get; set; }
+
+    public State WorkflowFailedState { get; set; }
 }

@@ -10,21 +10,10 @@ namespace MaterialsWarehouse.Application.Consumers
 {
     public class ReserveMaterialConsumer : BaseConsumer<ReserveMaterialCommandEvent, ReserveMaterialCommand>, IConsumer<ReserveMaterialCommandEvent>
     {
-        private readonly IEventPublisher eventPublisher;
-
-        public ReserveMaterialConsumer(IMediator mediator, IMapper mapper, IEventPublisher eventPublisher) : base(mediator, mapper) 
+        public ReserveMaterialConsumer(IEventPublisher eventPublisher, IMediator mediator, IMapper mapper) : base(eventPublisher, mediator, mapper) 
         {
-            this.eventPublisher = eventPublisher;
         }
 
-        public async Task Consume(ConsumeContext<ReserveMaterialCommandEvent> context)
-        {
-            var result = await HandleMessage(context);
-
-            if (!result.IsSuccessfull)
-            {
-                await eventPublisher.Publish(new MaterialReservationFailedEvent(context.Message.WorkflowId));
-            }
-        }
+        public async Task Consume(ConsumeContext<ReserveMaterialCommandEvent> context) => await HandleMessage(context);
     }
 }
