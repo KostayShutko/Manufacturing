@@ -25,16 +25,16 @@ namespace Manufacturing.Common.Application.Consumers
 
         protected async Task<ResponseResultBase> HandleMessage(ConsumeContext<TMessage> context)
         {
-            var response = await HandleMessage(context.Message);
-            await PublishExecutionResult(context.Message.WorkflowId, response);
+            var command = mapper.Map<TCommand>(context.Message);
+            var response = await HandleCommand(command);
+            await HandleResponseResult(response, context.Message.WorkflowId);
             return response;
         }
 
-        private async Task<ResponseResultBase> HandleMessage(TMessage message)
+        private async Task<ResponseResultBase> HandleCommand(TCommand command)
         {
             try
             {
-                var command = mapper.Map<TCommand>(message);
                 var result = await mediator.Send(command);
                 if (result is ResponseResultBase responseResult)
                 {
@@ -49,7 +49,7 @@ namespace Manufacturing.Common.Application.Consumers
             }
         }
 
-        private async Task PublishExecutionResult(Guid workflowId, ResponseResultBase response)
+        private async Task HandleResponseResult(ResponseResultBase response, Guid workflowId)
         {
             if (response.HasError)
             {
