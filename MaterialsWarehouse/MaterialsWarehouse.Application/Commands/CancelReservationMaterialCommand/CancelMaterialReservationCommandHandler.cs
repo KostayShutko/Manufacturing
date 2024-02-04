@@ -6,14 +6,14 @@ using MediatR;
 
 namespace MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand
 {
-    public class CancelReservationMaterialCommandHandler : BaseCommand<Material>, IRequestHandler<CancelReservationMaterialCommand, ResponseResult>
+    public class CancelMaterialReservationCommandHandler : BaseCommand<Material>, IRequestHandler<CancelMaterialReservationCommand, ResponseResult>
     {
-        public CancelReservationMaterialCommandHandler(IUnitOfWork unitOfWork)
+        public CancelMaterialReservationCommandHandler(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
         }
 
-        public async Task<ResponseResult> Handle(CancelReservationMaterialCommand command, CancellationToken cancellationToken)
+        public async Task<ResponseResult> Handle(CancelMaterialReservationCommand command, CancellationToken cancellationToken)
         {
             var material = await FindByIdAsync(command.MaterialId);
 

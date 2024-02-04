@@ -2,7 +2,7 @@
 
 public enum ProductState
 {
-    Initial,
+    Available,
     Reserved,
     Placed,
     Shipped

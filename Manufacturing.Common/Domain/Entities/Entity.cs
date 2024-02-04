@@ -1,4 +1,5 @@
-﻿using Manufacturing.Common.Domain.BusinessRules;
+﻿using Manufacturing.Common.Common.Extensions;
+using Manufacturing.Common.Domain.BusinessRules;
 using Manufacturing.Common.Domain.Exceptions;
 
 namespace Manufacturing.Common.Domain.Entities
@@ -26,6 +27,6 @@ namespace Manufacturing.Common.Domain.Entities
             WorkflowId = workflowId;
         }
 
-        public bool IsNew() => Id == 0;
+        public bool IsNew() => Id.IsNew();
     }
 }

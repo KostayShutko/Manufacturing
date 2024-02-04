@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Manufacturing.Common.Application.EventContracts.Products;
 using Manufacturing.Common.Application.EventContracts.Transportations;
+using ProductsWarehouse.Application.Commands.CancelProductReservationCommand;
 using ProductsWarehouse.Application.Commands.PlaceProductCommand;
 using ProductsWarehouse.Application.Commands.ReserveProductCommand;
 using ProductsWarehouse.Application.DTOs;
@@ -15,5 +16,6 @@ public class ProductProfile : Profile
         CreateMap<Product, ProductDto>();
         CreateMap<ReserveProductCommandEvent, ReserveProductCommand>();
         CreateMap<ProductTransportedEvent, PlaceProductCommand>();
+        CreateMap<CancelProductReservationCommandEvent, CancelProductReservationCommand>();
     }
 }

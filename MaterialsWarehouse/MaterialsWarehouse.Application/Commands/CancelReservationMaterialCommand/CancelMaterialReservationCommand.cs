@@ -3,9 +3,9 @@ using MediatR;
 
 namespace MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand
 {
-    public class CancelReservationMaterialCommand : IRequest<ResponseResult>
+    public class CancelMaterialReservationCommand : IRequest<ResponseResult>
     {
-        public CancelReservationMaterialCommand(int materialId)
+        public CancelMaterialReservationCommand(int materialId)
         {
             MaterialId = materialId;
         }

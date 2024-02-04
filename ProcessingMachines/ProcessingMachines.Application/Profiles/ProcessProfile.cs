@@ -5,6 +5,7 @@ using ProcessingMachines.Application.Commands.CreateProcessCommand;
 using ProcessingMachines.Application.Commands.StartProcessCommand;
 using ProcessingMachines.Application.DTOs;
 using ProcessingMachines.Domain.Entities;
+using ProcessingMachines.Application.Commands.CancelProcessCommand;
 
 namespace ProcessingMachines.Application.Profiles;
 
@@ -15,5 +16,6 @@ public class ProcessProfile : Profile
         CreateMap<Process, ProcessDto>();
         CreateMap<MaterialTransportedEvent, CreateProcessCommand>();
         CreateMap<StartProcessingCommandEvent, StartProcessCommand>();
+        CreateMap<CancelProcessCommandEvent, CancelProcessCommand>();
     }
 }

@@ -4,5 +4,6 @@ public enum ProcessState
 { 
     Ready,
     InProgress,
-    Completed
+    Completed,
+    Canceled
 }

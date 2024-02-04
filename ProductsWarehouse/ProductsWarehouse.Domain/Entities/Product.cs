@@ -7,7 +7,7 @@ public class Product : Entity
 {
     public Product()
     {
-        State = ProductState.Initial;
+        State = ProductState.Available;
     }
 
     public ProductState State { get; set; }
@@ -52,5 +52,10 @@ public class Product : Entity
 
         State = ProductState.Shipped;
         ShippedOn = DateTime.Now;
+    }
+
+    public void CancelReservation()
+    {
+        State = ProductState.Available;
     }
 }

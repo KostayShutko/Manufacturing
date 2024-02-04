@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Manufacturing.Common.Application.EventContracts.Materials;
 using Manufacturing.Common.Application.EventContracts.Transportations;
+using MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand;
 using MaterialsWarehouse.Application.Commands.ReserveMaterialCommand;
 using MaterialsWarehouse.Application.Commands.TransportMaterialCommand;
 using MaterialsWarehouse.Application.DTOs;
@@ -15,6 +16,7 @@ namespace MaterialsWarehouse.Application.Profiles
             CreateMap<Material, MaterialDto>();
             CreateMap<ReserveMaterialCommandEvent, ReserveMaterialCommand>();
             CreateMap<MaterialTransportedEvent, TransportMaterialCommand>();
+            CreateMap<CancelMaterialReservationCommandEvent, CancelMaterialReservationCommand>();
         }
     }
 }

@@ -5,6 +5,8 @@ using Manufacturing.Common.Application.EventContracts.Products;
 using Manufacturing.Common.Application.EventContracts.Transportations;
 using Manufacturing.Common.Application.EventContracts.Workflows;
 using MassTransit;
+using WorkflowOrchestrator.Application.Workflows.Extensions;
+using WorkflowOrchestrator.Application.Workflows.Handlers;
 using WorkflowOrchestrator.Domain.Entities;
 
 namespace WorkflowOrchestrator.Application.Workflows;
@@ -112,6 +114,7 @@ public class ProductProductionWorkflow : MassTransitStateMachine<ProductProducti
     private void HandleExecutionFailedEventStep()
     {
         DuringAny(When(ExecutionFailedEvent)
+            .HandleBy(handler => handler.OfType<ProductProductionFailureHandler>())
             .TransitionTo(WorkflowFailedState));
     }
 

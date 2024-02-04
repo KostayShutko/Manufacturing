@@ -43,7 +43,7 @@ namespace MaterialsWarehouse.Controllers
         [HttpPut("cancelReservation/{id}")]
         public async Task<IActionResult> CancelReservationMaterialAsync(int id)
         {
-            var result = await mediator.Send(new CancelReservationMaterialCommand(id));
+            var result = await mediator.Send(new CancelMaterialReservationCommand(id));
             return Ok(result);
         }
 

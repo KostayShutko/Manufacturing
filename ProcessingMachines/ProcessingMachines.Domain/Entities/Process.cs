@@ -60,4 +60,9 @@ public class Process : Entity
         ProductCode = productCode;
         OperationsPlan = plan;
     }
+
+    public void Cancel()
+    {
+        State = ProcessState.Canceled;
+    }
 }

@@ -3,9 +3,9 @@ using Manufacturing.Common.Application.Extensions;
 
 namespace MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand
 {
-    public class CancelReservationMaterialCommandValidator : AbstractValidator<CancelReservationMaterialCommand>
+    public class CancelMaterialReservationCommandValidator : AbstractValidator<CancelMaterialReservationCommand>
     {
-        public CancelReservationMaterialCommandValidator()
+        public CancelMaterialReservationCommandValidator()
         {
             RuleFor(command => command.MaterialId).IdentityWithMessage();
         }

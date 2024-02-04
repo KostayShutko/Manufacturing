@@ -1,7 +1,6 @@
 ﻿using Manufacturing.Common.Application.Commands;
 using Manufacturing.Common.Application.EventContracts.Products;
 using Manufacturing.Common.Application.ResponseResults;
-using Manufacturing.Common.Application.Specifications;
 using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Repository;
 using MediatR;
