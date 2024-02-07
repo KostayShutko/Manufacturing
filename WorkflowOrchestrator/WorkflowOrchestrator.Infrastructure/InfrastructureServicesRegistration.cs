@@ -1,7 +1,9 @@
 ﻿using Manufacturing.Common.Infrastructure.Configurations;
+using Manufacturing.Common.Infrastructure.Database;
 using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Providers;
 using MassTransit;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,5 +30,12 @@ public static class InfrastructureServicesRegistration
         });
 
         return services;
+    }
+
+    public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
+    {
+        app.ApplyMigrations<WorkflowsContext>();
+
+        return app;
     }
 }

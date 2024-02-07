@@ -2,7 +2,9 @@
 using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Providers;
 using Manufacturing.Common.Infrastructure.Repository;
+using Manufacturing.Common.Infrastructure.Database;
 using MaterialsWarehouse.Infrastructure.Database;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +25,13 @@ namespace MaterialsWarehouse.Infrastructure
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
             return services;
+        }
+
+        public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
+        {
+            app.ApplyMigrations<MaterialsContext>();
+
+            return app;
         }
     }
 }

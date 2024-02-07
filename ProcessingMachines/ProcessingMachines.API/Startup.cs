@@ -39,5 +39,7 @@ public class Startup
         {
             endpoints.MapControllers();
         });
+
+        app.ApplyMigrations();
     }
 }

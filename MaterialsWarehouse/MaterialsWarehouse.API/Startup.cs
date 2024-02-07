@@ -37,6 +37,8 @@ namespace MaterialsWarehouse.API
             {
                 endpoints.MapControllers();
             });
+
+            app.ApplyMigrations();
         }
     }
 }

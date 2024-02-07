@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using ProcessingMachines.Infrastructure.Database;
+using Microsoft.AspNetCore.Builder;
+using Manufacturing.Common.Infrastructure.Database;
 
 namespace ProcessingMachines.Infrastructure;
 
@@ -23,5 +25,12 @@ public static class InfrastructureServicesRegistration
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
         return services;
+    }
+
+    public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
+    {
+        app.ApplyMigrations<ProcessesContext>();
+
+        return app;
     }
 }

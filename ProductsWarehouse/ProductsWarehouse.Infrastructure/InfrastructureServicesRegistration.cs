@@ -1,7 +1,9 @@
 ﻿using Manufacturing.Common.Infrastructure.Configurations;
+using Manufacturing.Common.Infrastructure.Database;
 using Manufacturing.Common.Infrastructure.EventBus;
 using Manufacturing.Common.Infrastructure.Providers;
 using Manufacturing.Common.Infrastructure.Repository;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,5 +25,12 @@ public static class InfrastructureServicesRegistration
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
         return services;
+    }
+
+    public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
+    {
+        app.ApplyMigrations<ProductsContext>();
+
+        return app;
     }
 }
