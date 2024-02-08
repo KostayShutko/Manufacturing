@@ -1,7 +1,6 @@
-﻿namespace Manufacturing.Common.Infrastructure.EventBus
+﻿namespace Manufacturing.Common.Infrastructure.EventBus;
+
+public interface IEventPublisher
 {
-    public interface IEventPublisher
-    {
-        Task Publish<TMessage>(TMessage eventMessage);
-    }
+    Task Publish<TMessage>(TMessage eventMessage);
 }

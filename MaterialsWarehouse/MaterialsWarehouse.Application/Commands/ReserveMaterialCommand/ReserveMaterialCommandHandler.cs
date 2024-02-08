@@ -8,35 +8,34 @@ using MaterialsWarehouse.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
+namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand;
+
+public class ReserveMaterialCommandHandler : BaseCommand<Material>, IRequestHandler<ReserveMaterialCommand, ResponseResult<int>>
 {
-    public class ReserveMaterialCommandHandler : BaseCommand<Material>, IRequestHandler<ReserveMaterialCommand, ResponseResult<int>>
+    private readonly IEventPublisher eventPublisher;
+
+    public ReserveMaterialCommandHandler(IUnitOfWork unitOfWork, IEventPublisher eventPublisher)
+        :base(unitOfWork)
     {
-        private readonly IEventPublisher eventPublisher;
+        this.eventPublisher = eventPublisher;
+    }
 
-        public ReserveMaterialCommandHandler(IUnitOfWork unitOfWork, IEventPublisher eventPublisher)
-            :base(unitOfWork)
+    public async Task<ResponseResult<int>> Handle(ReserveMaterialCommand command, CancellationToken cancellationToken)
+    {
+        var material = await FindBySpecification(new MaterialToReserveSpecification()).FirstOrDefaultAsync();
+
+        if (material == null)
         {
-            this.eventPublisher = eventPublisher;
+            return ResponseResult<int>.CreateFail("No material to reserve");
         }
 
-        public async Task<ResponseResult<int>> Handle(ReserveMaterialCommand command, CancellationToken cancellationToken)
-        {
-            var material = await FindBySpecification(new MaterialToReserveSpecification()).FirstOrDefaultAsync();
+        material.Reserve();
+        material.AssignWorkflow(command.WorkflowId);
 
-            if (material == null)
-            {
-                return ResponseResult<int>.CreateFail("No material to reserve");
-            }
+        await SaveChangesAsync(material);
 
-            material.Reserve();
-            material.AssignWorkflow(command.WorkflowId);
+        await eventPublisher.Publish(new MaterialReservedEvent(material.Id, material.WorkflowId));
 
-            await SaveChangesAsync(material);
-
-            await eventPublisher.Publish(new MaterialReservedEvent(material.Id, material.WorkflowId));
-
-            return ResponseResult.CreateSuccess(material.Id);
-        }
+        return ResponseResult.CreateSuccess(material.Id);
     }
 }

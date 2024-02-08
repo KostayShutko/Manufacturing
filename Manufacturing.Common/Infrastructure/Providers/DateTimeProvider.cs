@@ -1,7 +1,6 @@
-﻿namespace Manufacturing.Common.Infrastructure.Providers
+﻿namespace Manufacturing.Common.Infrastructure.Providers;
+
+public class DateTimeProvider : IDateTimeProvider
 {
-    public class DateTimeProvider : IDateTimeProvider
-    {
-        public DateTime GetCurrentDateTime() => DateTime.UtcNow;
-    }
+    public DateTime GetCurrentDateTime() => DateTime.UtcNow;
 }

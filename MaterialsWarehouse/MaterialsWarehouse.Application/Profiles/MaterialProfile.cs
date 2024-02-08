@@ -7,16 +7,15 @@ using MaterialsWarehouse.Application.Commands.TransportMaterialCommand;
 using MaterialsWarehouse.Application.DTOs;
 using MaterialsWarehouse.Domain.Entities;
 
-namespace MaterialsWarehouse.Application.Profiles
+namespace MaterialsWarehouse.Application.Profiles;
+
+public class MaterialProfile : Profile
 {
-    public class MaterialProfile : Profile
+    public MaterialProfile() 
     {
-        public MaterialProfile() 
-        {
-            CreateMap<Material, MaterialDto>();
-            CreateMap<ReserveMaterialCommandEvent, ReserveMaterialCommand>();
-            CreateMap<MaterialTransportedEvent, TransportMaterialCommand>();
-            CreateMap<CancelMaterialReservationCommandEvent, CancelMaterialReservationCommand>();
-        }
+        CreateMap<Material, MaterialDto>();
+        CreateMap<ReserveMaterialCommandEvent, ReserveMaterialCommand>();
+        CreateMap<MaterialTransportedEvent, TransportMaterialCommand>();
+        CreateMap<CancelMaterialReservationCommandEvent, CancelMaterialReservationCommand>();
     }
 }

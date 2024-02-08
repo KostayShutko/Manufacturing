@@ -1,10 +1,9 @@
 ﻿using Manufacturing.Common.Domain.Entities;
 
-namespace Manufacturing.Common.Infrastructure.Repository
+namespace Manufacturing.Common.Infrastructure.Repository;
+
+public interface IUnitOfWork : IDisposable
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        IRepository<TEntity> Repository<TEntity>() where TEntity : Entity;
-        Task<int> SaveChangesAsync();
-    }
+    IRepository<TEntity> Repository<TEntity>() where TEntity : Entity;
+    Task<int> SaveChangesAsync();
 }

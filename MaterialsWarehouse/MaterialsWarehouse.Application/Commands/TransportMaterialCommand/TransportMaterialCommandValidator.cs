@@ -1,13 +1,12 @@
 ﻿using FluentValidation;
 using Manufacturing.Common.Application.Extensions;
 
-namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand
+namespace MaterialsWarehouse.Application.Commands.TransportMaterialCommand;
+
+public class TransportMaterialCommandValidator : AbstractValidator<TransportMaterialCommand>
 {
-    public class TransportMaterialCommandValidator : AbstractValidator<TransportMaterialCommand>
+    public TransportMaterialCommandValidator()
     {
-        public TransportMaterialCommandValidator()
-        {
-            RuleFor(command => command.MaterialId).IdentityWithMessage();
-        }
+        RuleFor(command => command.MaterialId).IdentityWithMessage();
     }
 }

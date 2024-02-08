@@ -2,9 +2,8 @@
 using MaterialsWarehouse.Application.DTOs;
 using MediatR;
 
-namespace MaterialsWarehouse.Application.Queries.GetAllMaterialsQuery
+namespace MaterialsWarehouse.Application.Queries.GetAllMaterialsQuery;
+
+public class GetAllMaterialsQuery : IRequest<ResponseResult<IEnumerable<MaterialDto>>>
 {
-    public class GetAllMaterialsQuery : IRequest<ResponseResult<IEnumerable<MaterialDto>>>
-    {
-    }
 }

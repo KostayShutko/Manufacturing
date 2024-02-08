@@ -3,30 +3,29 @@ using Manufacturing.Common.Infrastructure.Providers;
 using MaterialsWarehouse.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MaterialsWarehouse.Infrastructure.Database
+namespace MaterialsWarehouse.Infrastructure.Database;
+
+public class MaterialsContext : DbContext
 {
-    public class MaterialsContext : DbContext
+    private readonly IDateTimeProvider dateTimeProvider;
+    
+    public MaterialsContext(IDateTimeProvider dateTimeProvider, DbContextOptions<MaterialsContext> options)
+        : base(options)
     {
-        private readonly IDateTimeProvider dateTimeProvider;
-        
-        public MaterialsContext(IDateTimeProvider dateTimeProvider, DbContextOptions<MaterialsContext> options)
-            : base(options)
-        {
-            this.dateTimeProvider = dateTimeProvider;
-        }
+        this.dateTimeProvider = dateTimeProvider;
+    }
 
-        public DbSet<Material>? Materials { get; set; }
+    public DbSet<Material>? Materials { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new MaterialEntityTypeConfiguration());
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new MaterialEntityTypeConfiguration());
 
-            base.OnModelCreating(modelBuilder);
-        }
+        base.OnModelCreating(modelBuilder);
+    }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.AddInterceptors(new AuditableEntitySaveChangesInterceptor(dateTimeProvider));
-        }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(new AuditableEntitySaveChangesInterceptor(dateTimeProvider));
     }
 }

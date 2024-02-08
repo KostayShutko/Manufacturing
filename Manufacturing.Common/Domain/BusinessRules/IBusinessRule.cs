@@ -1,9 +1,8 @@
-﻿namespace Manufacturing.Common.Domain.BusinessRules
-{
-    public interface IBusinessRule
-    {
-        bool IsBroken();
+﻿namespace Manufacturing.Common.Domain.BusinessRules;
 
-        string Message { get; }
-    }
+public interface IBusinessRule
+{
+    bool IsBroken();
+
+    string Message { get; }
 }

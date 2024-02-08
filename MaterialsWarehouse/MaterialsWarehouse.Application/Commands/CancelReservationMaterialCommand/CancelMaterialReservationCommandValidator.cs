@@ -1,13 +1,12 @@
 ﻿using FluentValidation;
 using Manufacturing.Common.Application.Extensions;
 
-namespace MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand
+namespace MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand;
+
+public class CancelMaterialReservationCommandValidator : AbstractValidator<CancelMaterialReservationCommand>
 {
-    public class CancelMaterialReservationCommandValidator : AbstractValidator<CancelMaterialReservationCommand>
+    public CancelMaterialReservationCommandValidator()
     {
-        public CancelMaterialReservationCommandValidator()
-        {
-            RuleFor(command => command.MaterialId).IdentityWithMessage();
-        }
+        RuleFor(command => command.MaterialId).IdentityWithMessage();
     }
 }

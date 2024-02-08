@@ -1,9 +1,8 @@
-﻿namespace Manufacturing.Common.Application.EventContracts.Materials
+﻿namespace Manufacturing.Common.Application.EventContracts.Materials;
+
+public class ReserveMaterialCommandEvent : BaseEvent
 {
-    public class ReserveMaterialCommandEvent : BaseEvent
+    public ReserveMaterialCommandEvent(Guid workflowId) : base(workflowId)
     {
-        public ReserveMaterialCommandEvent(Guid workflowId) : base(workflowId)
-        {
-        }
     }
 }

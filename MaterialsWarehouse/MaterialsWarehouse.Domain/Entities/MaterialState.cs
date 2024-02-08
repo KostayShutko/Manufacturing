@@ -1,9 +1,8 @@
-﻿namespace MaterialsWarehouse.Domain.Entities
+﻿namespace MaterialsWarehouse.Domain.Entities;
+
+public enum MaterialState
 {
-    public enum MaterialState
-    {
-        Available,
-        Reserved,
-        Transported
-    }
+    Available,
+    Reserved,
+    Transported
 }

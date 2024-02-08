@@ -3,42 +3,41 @@ using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Manufacturing.Common.Infrastructure.Configurations
+namespace Manufacturing.Common.Infrastructure.Configurations;
+
+public static class InfrastructureServiceConfiguration
 {
-    public static class InfrastructureServiceConfiguration
+    public static IServiceCollection AddMassTransitBus(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Type[] consumers)
     {
-        public static IServiceCollection AddMassTransitBus(
-            this IServiceCollection services,
-            IConfiguration configuration,
-            Type[] consumers)
+        return services.AddMassTransit(busConfigurator =>
         {
-            return services.AddMassTransit(busConfigurator =>
-            {
-                consumers.ForEach(consumer => 
-                    busConfigurator
-                        .AddConsumer(consumer)
-                        .Endpoint(x => x.InstanceId = consumer.ToString()));
+            consumers.ForEach(consumer => 
+                busConfigurator
+                    .AddConsumer(consumer)
+                    .Endpoint(x => x.InstanceId = consumer.ToString()));
 
-                busConfigurator.AddMassTransitRabbitMq(configuration);
-            });
-        }
+            busConfigurator.AddMassTransitRabbitMq(configuration);
+        });
+    }
 
-        public static IBusRegistrationConfigurator AddMassTransitRabbitMq(
-            this IBusRegistrationConfigurator busConfigurator,
-            IConfiguration configuration)
+    public static IBusRegistrationConfigurator AddMassTransitRabbitMq(
+        this IBusRegistrationConfigurator busConfigurator,
+        IConfiguration configuration)
+    {
+        busConfigurator.UsingRabbitMq((context, busFactoryConfigurator) =>
         {
-            busConfigurator.UsingRabbitMq((context, busFactoryConfigurator) =>
+            var rabbitMqConfiguration = configuration.GetConfigurationModel<RabbitMqConfiguration>(nameof(RabbitMqConfiguration));
+            busFactoryConfigurator.Host(rabbitMqConfiguration.HostName, rabbitMqConfiguration.Port, "/", hostConfigurator =>
             {
-                var rabbitMqConfiguration = configuration.GetConfigurationModel<RabbitMqConfiguration>(nameof(RabbitMqConfiguration));
-                busFactoryConfigurator.Host(rabbitMqConfiguration.HostName, rabbitMqConfiguration.Port, "/", hostConfigurator =>
-                {
-                    hostConfigurator.Username(rabbitMqConfiguration.UserName);
-                    hostConfigurator.Password(rabbitMqConfiguration.Password);
-                });
-                busFactoryConfigurator.ConfigureEndpoints(context);
+                hostConfigurator.Username(rabbitMqConfiguration.UserName);
+                hostConfigurator.Password(rabbitMqConfiguration.Password);
             });
+            busFactoryConfigurator.ConfigureEndpoints(context);
+        });
 
-            return busConfigurator;
-        }
+        return busConfigurator;
     }
 }

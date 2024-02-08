@@ -7,25 +7,24 @@ using MaterialsWarehouse.Application.Specifications;
 using MaterialsWarehouse.Domain.Entities;
 using MediatR;
 
-namespace MaterialsWarehouse.Application.Queries.GetAllMaterialsQuery
+namespace MaterialsWarehouse.Application.Queries.GetAllMaterialsQuery;
+
+internal class GetAllMaterialsQueryHandler : BaseQuery<Material>, IRequestHandler<GetAllMaterialsQuery, ResponseResult<IEnumerable<MaterialDto>>>
 {
-    internal class GetAllMaterialsQueryHandler : BaseQuery<Material>, IRequestHandler<GetAllMaterialsQuery, ResponseResult<IEnumerable<MaterialDto>>>
+    private readonly IMapper mapper;
+
+    public GetAllMaterialsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        : base(unitOfWork)
     {
-        private readonly IMapper mapper;
+        this.mapper = mapper;
+    }
 
-        public GetAllMaterialsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
-            : base(unitOfWork)
-        {
-            this.mapper = mapper;
-        }
+    public async Task<ResponseResult<IEnumerable<MaterialDto>>> Handle(GetAllMaterialsQuery query, CancellationToken cancellationToken)
+    {
+        var materials = await FindBySpecificationAsync(new AllMaterialsSpecification());
 
-        public async Task<ResponseResult<IEnumerable<MaterialDto>>> Handle(GetAllMaterialsQuery query, CancellationToken cancellationToken)
-        {
-            var materials = await FindBySpecificationAsync(new AllMaterialsSpecification());
+        var materialsDto = mapper.Map<IEnumerable<MaterialDto>>(materials);
 
-            var materialsDto = mapper.Map<IEnumerable<MaterialDto>>(materials);
-
-            return ResponseResult.CreateSuccess(materialsDto);
-        }
+        return ResponseResult.CreateSuccess(materialsDto);
     }
 }

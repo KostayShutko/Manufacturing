@@ -9,29 +9,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MaterialsWarehouse.Infrastructure
+namespace MaterialsWarehouse.Infrastructure;
+
+public static class InfrastructureServicesRegistration
 {
-    public static class InfrastructureServicesRegistration
+    public static IServiceCollection AddInfrastructureServices(
+        this IServiceCollection services, 
+        IConfiguration configuration, 
+        Type[] consumers)
     {
-        public static IServiceCollection AddInfrastructureServices(
-            this IServiceCollection services, 
-            IConfiguration configuration, 
-            Type[] consumers)
-        {
-            services.AddMassTransitBus(configuration, consumers);
-            services.AddTransient<IEventPublisher, EventPublisher>();
-            services.AddDbContext<MaterialsContext>(options => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnectionString")));
-            services.AddTransient<IUnitOfWork>(serviceProvider => new UnitOfWork(serviceProvider.GetService<MaterialsContext>()));
-            services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+        services.AddMassTransitBus(configuration, consumers);
+        services.AddTransient<IEventPublisher, EventPublisher>();
+        services.AddDbContext<MaterialsContext>(options => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnectionString")));
+        services.AddTransient<IUnitOfWork>(serviceProvider => new UnitOfWork(serviceProvider.GetService<MaterialsContext>()));
+        services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
-            return services;
-        }
+        return services;
+    }
 
-        public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
-        {
-            app.ApplyMigrations<MaterialsContext>();
+    public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
+    {
+        app.ApplyMigrations<MaterialsContext>();
 
-            return app;
-        }
+        return app;
     }
 }

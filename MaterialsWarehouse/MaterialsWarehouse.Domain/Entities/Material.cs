@@ -1,41 +1,40 @@
 ﻿using Manufacturing.Common.Domain.Entities;
 using MaterialsWarehouse.Domain.BusinessRules;
 
-namespace MaterialsWarehouse.Domain.Entities
+namespace MaterialsWarehouse.Domain.Entities;
+
+public class Material : Entity
 {
-    public class Material : Entity
+    public Material() 
     {
-        public Material() 
-        {
-            State = MaterialState.Available;
-        }
+        State = MaterialState.Available;
+    }
 
-        public MaterialState State { get; set; }
+    public MaterialState State { get; set; }
 
-        public static Material Create()
-        {
-            var material = new Material();
+    public static Material Create()
+    {
+        var material = new Material();
 
-            return material;
-        }
+        return material;
+    }
 
-        public void Reserve()
-        {
-            CheckRule(new MaterialMustBeAvailableRule(State));
+    public void Reserve()
+    {
+        CheckRule(new MaterialMustBeAvailableRule(State));
 
-            State = MaterialState.Reserved;
-        }
+        State = MaterialState.Reserved;
+    }
 
-        public void Transport()
-        {
-            CheckRule(new MaterialMustBeReservedRule(State));
+    public void Transport()
+    {
+        CheckRule(new MaterialMustBeReservedRule(State));
 
-            State = MaterialState.Transported;
-        }
+        State = MaterialState.Transported;
+    }
 
-        public void CancelReservation()
-        {
-            State = MaterialState.Available;
-        }
+    public void CancelReservation()
+    {
+        State = MaterialState.Available;
     }
 }

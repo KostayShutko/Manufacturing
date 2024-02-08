@@ -1,9 +1,8 @@
-﻿namespace Manufacturing.Common.Application.ResponseResults
+﻿namespace Manufacturing.Common.Application.ResponseResults;
+
+public interface IResponseResult
 {
-    public interface IResponseResult
-    {
-        bool IsSuccessfull { get; }
-        bool HasError { get; }
-        string? Error { get; init; }
-    }
+    bool IsSuccessfull { get; }
+    bool HasError { get; }
+    string? Error { get; init; }
 }

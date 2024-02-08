@@ -1,7 +1,6 @@
-﻿namespace Manufacturing.Common.Infrastructure.Providers
+﻿namespace Manufacturing.Common.Infrastructure.Providers;
+
+public interface IDateTimeProvider
 {
-    public interface IDateTimeProvider
-    {
-        public DateTime GetCurrentDateTime();
-    }
+    public DateTime GetCurrentDateTime();
 }

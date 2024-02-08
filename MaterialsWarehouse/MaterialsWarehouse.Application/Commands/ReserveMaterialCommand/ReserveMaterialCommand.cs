@@ -1,10 +1,9 @@
 ﻿using Manufacturing.Common.Application.ResponseResults;
 using MediatR;
 
-namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand
+namespace MaterialsWarehouse.Application.Commands.ReserveMaterialCommand;
+
+public class ReserveMaterialCommand : IRequest<ResponseResult<int>>
 {
-    public class ReserveMaterialCommand : IRequest<ResponseResult<int>>
-    {
-        public Guid WorkflowId { get; set; }
-    }
+    public Guid WorkflowId { get; set; }
 }

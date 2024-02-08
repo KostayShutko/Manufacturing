@@ -4,24 +4,23 @@ using Manufacturing.Common.Infrastructure.Repository;
 using MaterialsWarehouse.Domain.Entities;
 using MediatR;
 
-namespace MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand
+namespace MaterialsWarehouse.Application.Commands.CancelReservationMaterialCommand;
+
+public class CancelMaterialReservationCommandHandler : BaseCommand<Material>, IRequestHandler<CancelMaterialReservationCommand, ResponseResult>
 {
-    public class CancelMaterialReservationCommandHandler : BaseCommand<Material>, IRequestHandler<CancelMaterialReservationCommand, ResponseResult>
+    public CancelMaterialReservationCommandHandler(IUnitOfWork unitOfWork)
+        : base(unitOfWork)
     {
-        public CancelMaterialReservationCommandHandler(IUnitOfWork unitOfWork)
-            : base(unitOfWork)
-        {
-        }
+    }
 
-        public async Task<ResponseResult> Handle(CancelMaterialReservationCommand command, CancellationToken cancellationToken)
-        {
-            var material = await FindByIdAsync(command.MaterialId);
+    public async Task<ResponseResult> Handle(CancelMaterialReservationCommand command, CancellationToken cancellationToken)
+    {
+        var material = await FindByIdAsync(command.MaterialId);
 
-            material.CancelReservation();
+        material.CancelReservation();
 
-            await SaveChangesAsync(material);
+        await SaveChangesAsync(material);
 
-            return ResponseResult.CreateSuccess();
-        }
+        return ResponseResult.CreateSuccess();
     }
 }
