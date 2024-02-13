@@ -21,6 +21,7 @@ public static class ApplicationServicesRegistration
         new Type[] 
         { 
             typeof(MaterialTransportedConsumer),
-            typeof(StartProcessConsumer)
+            typeof(StartProcessConsumer),
+            typeof(CancelProcessConsumer)
         };
 }

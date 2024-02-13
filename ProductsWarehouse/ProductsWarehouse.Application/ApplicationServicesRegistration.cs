@@ -21,6 +21,7 @@ public static class ApplicationServicesRegistration
         new Type[] 
         { 
             typeof(ReserveProductConsumer), 
-            typeof(ProductTransportedConsumer) 
+            typeof(ProductTransportedConsumer),
+            typeof(CancelProductReservationConsumer)
         };
 }

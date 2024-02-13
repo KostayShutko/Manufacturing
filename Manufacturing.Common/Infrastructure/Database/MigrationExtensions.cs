@@ -12,7 +12,11 @@ public static class MigrationExtensions
         var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
         using var applyMigrationsScope = serviceScopeFactory.CreateScope();
         var dbContext = applyMigrationsScope.ServiceProvider.GetService<TDbContext>();
-        dbContext?.Database.Migrate();
+        var pendingMigrations = dbContext?.Database.GetPendingMigrations().Count();
+        if (pendingMigrations > 0)
+        {
+            dbContext?.Database.Migrate();
+        }
         return app;
     }
 }

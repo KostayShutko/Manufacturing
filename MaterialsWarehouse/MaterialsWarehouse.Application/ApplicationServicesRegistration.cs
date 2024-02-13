@@ -21,6 +21,7 @@ public static class ApplicationServicesRegistration
         new Type[] 
         { 
             typeof(ReserveMaterialConsumer),
-            typeof(MaterialTransportedConsumer)
+            typeof(MaterialTransportedConsumer),
+            typeof(CancelMaterialReservationConsumer)
         };
 }
