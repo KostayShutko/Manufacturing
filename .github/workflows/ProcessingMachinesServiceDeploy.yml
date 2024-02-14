@@ -1,0 +1,33 @@
+name: ProcessingMachinesServiceDeploy
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'ProcessingMachines/**'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'ProcessingMachines/**'
+
+env:
+  PROJECT_PATH: "ProcessingMachines/ProcessingMachines.API/ProcessingMachines.API.csproj"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.PROJECT_PATH }}
+
+    - name: Build
+      run: dotnet build --no-restore ${{ env.PROJECT_PATH }}
