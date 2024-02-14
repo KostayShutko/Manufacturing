@@ -16,7 +16,7 @@ public class MaterialsController : ControllerBase
 
     public MaterialsController(IMediator mediator)
     {
-        this.mediator = mediator; //com
+        this.mediator = mediator;
     }
 
     [HttpPost]
