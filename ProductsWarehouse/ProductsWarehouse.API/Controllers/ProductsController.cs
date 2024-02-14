@@ -16,7 +16,7 @@ public class ProductsController : ControllerBase
 
     public ProductsController(IMediator mediator)
     {
-        this.mediator = mediator; // te
+        this.mediator = mediator;
     }
 
     [HttpGet]
