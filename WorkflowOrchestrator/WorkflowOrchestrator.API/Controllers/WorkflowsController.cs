@@ -14,7 +14,7 @@ public class WorkflowsController : ControllerBase
 
     public WorkflowsController(IMediator mediator)
     {
-        this.mediator = mediator;
+        this.mediator = mediator;//test
     }
 
     [HttpPost("products")]
