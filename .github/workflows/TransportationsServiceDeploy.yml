@@ -1,0 +1,33 @@
+name: TransportationsServiceDeploy
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'Transportations/**'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'Transportations/**'
+
+env:
+  PROJECT_PATH: "Transportations/Transportations.API/Transportations.API.csproj"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.PROJECT_PATH }}
+
+    - name: Build
+      run: dotnet build --no-restore ${{ env.PROJECT_PATH }}
