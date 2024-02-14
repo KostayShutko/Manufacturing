@@ -15,7 +15,7 @@ public class ProcessesController : ControllerBase
 
     public ProcessesController(IMediator mediator)
     {
-        this.mediator = mediator;
+        this.mediator = mediator;//test
     }
 
     [HttpGet]
