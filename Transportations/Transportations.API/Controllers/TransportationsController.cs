@@ -15,7 +15,7 @@ public class TransportationsController : ControllerBase
 
     public TransportationsController(IMediator mediator)
     {
-        this.mediator = mediator;
+        this.mediator = mediator;//com
     }
 
     [HttpGet]
