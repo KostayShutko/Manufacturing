@@ -3,8 +3,12 @@ name: MaterialsWarehouseServiceDeploy
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - 'MaterialsWarehouse/**'
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'MaterialsWarehouse/**'
 
 env:
   PROJECT_PATH: "MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj"
