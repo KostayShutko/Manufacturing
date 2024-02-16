@@ -1,17 +1,17 @@
-name: ProductsWarehouseServiceDeploy
+name: WorkflowOrchestratorServiceBuild
 
 on:
   push:
     branches: [ "master" ]
     paths:
-      - 'ProductsWarehouse/**'
+      - 'WorkflowOrchestrator/**'
   pull_request:
     branches: [ "master" ]
     paths:
-      - 'ProductsWarehouse/**'
+      - 'WorkflowOrchestrator/**'
 
 env:
-  PROJECT_PATH: "ProductsWarehouse/ProductsWarehouse.API/ProductsWarehouse.API.csproj"
+  PROJECT_PATH: "WorkflowOrchestrator/WorkflowOrchestrator.API/WorkflowOrchestrator.API.csproj"
 
 jobs:
   build:

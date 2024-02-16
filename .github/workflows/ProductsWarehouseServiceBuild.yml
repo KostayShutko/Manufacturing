@@ -1,17 +1,17 @@
-name: TransportationsServiceDeploy
+name: ProductsWarehouseServiceBuild
 
 on:
   push:
     branches: [ "master" ]
     paths:
-      - 'Transportations/**'
+      - 'ProductsWarehouse/**'
   pull_request:
     branches: [ "master" ]
     paths:
-      - 'Transportations/**'
+      - 'ProductsWarehouse/**'
 
 env:
-  PROJECT_PATH: "Transportations/Transportations.API/Transportations.API.csproj"
+  PROJECT_PATH: "ProductsWarehouse/ProductsWarehouse.API/ProductsWarehouse.API.csproj"
 
 jobs:
   build:

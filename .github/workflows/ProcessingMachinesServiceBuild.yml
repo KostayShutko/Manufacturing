@@ -1,4 +1,4 @@
-name: ProcessingMachinesServiceDeploy
+name: ProcessingMachinesServiceBuild
 
 on:
   push:

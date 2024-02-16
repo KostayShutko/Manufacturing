@@ -1,17 +1,17 @@
-name: WorkflowOrchestratorServiceDeploy
+name: TransportationsServiceBuild
 
 on:
   push:
     branches: [ "master" ]
     paths:
-      - 'WorkflowOrchestrator/**'
+      - 'Transportations/**'
   pull_request:
     branches: [ "master" ]
     paths:
-      - 'WorkflowOrchestrator/**'
+      - 'Transportations/**'
 
 env:
-  PROJECT_PATH: "WorkflowOrchestrator/WorkflowOrchestrator.API/WorkflowOrchestrator.API.csproj"
+  PROJECT_PATH: "Transportations/Transportations.API/Transportations.API.csproj"
 
 jobs:
   build:
