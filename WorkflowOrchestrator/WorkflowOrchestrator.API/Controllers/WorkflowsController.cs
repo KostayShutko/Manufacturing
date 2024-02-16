@@ -30,6 +30,6 @@ public class WorkflowsController : ControllerBase
     {
         var query = new GetProductProductionWorkflowByIdQuery(id);
         var result = await mediator.Send(query);
-        return Ok(result);
+        return Ok(result); 
     }
 }
