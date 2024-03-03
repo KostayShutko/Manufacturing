@@ -4,23 +4,35 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_PATH: "MaterialsWarehouse/MaterialsWarehouse.API/MaterialsWarehouse.API.csproj"
+  IMAGE_NAME: materialswarehouse
+  DOCKERFILE_PATH: MaterialsWarehouse/MaterialsWarehouse.API/Dockerfile
+  PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+  CONTAINER_REGISTRY: europe-west1-docker.pkg.dev
+  REPOSITORY_NAME: images
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    - name: Authenticate to google cloud
+      uses: google-github-actions/auth@v2
       with:
-        dotnet-version: 6.0.x
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
-    - name: Restore dependencies
-      run: dotnet restore ${{ env.PROJECT_PATH }}
+    - name: Setup gcloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ env.PROJECT_ID }}
 
-    - name: Build
-      run: dotnet build --no-restore ${{ env.PROJECT_PATH }}
+    - name: Setup docker to authenticate
+      run: gcloud auth configure-docker $CONTAINER_REGISTRY
+
+    - name: Build docker image
+      run: docker build . -f $DOCKERFILE_PATH -t $CONTAINER_REGISTRY/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME:latest
+
+    - name: Push docker image to container registry
+      run: docker push $CONTAINER_REGISTRY/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME:latest
