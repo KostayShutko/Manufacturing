@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: materials-warehouse
-  type: NodePort 
+  type: LoadBalancer
   ports:
     - name: materials-warehouse-service
       port: 5000

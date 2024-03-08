@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: workflow-orchestrator
-  type: NodePort 
+  type: LoadBalancer
   ports:
     - name: workflow-orchestrator-service
       port: 5004

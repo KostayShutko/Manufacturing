@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: products-warehouse
-  type: NodePort 
+  type: LoadBalancer
   ports:
     - name: products-warehouse-service
       port: 5002

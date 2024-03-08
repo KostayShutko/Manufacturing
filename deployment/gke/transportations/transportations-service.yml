@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: transportations
-  type: NodePort 
+  type: LoadBalancer
   ports:
     - name: transportations-service
       port: 5003

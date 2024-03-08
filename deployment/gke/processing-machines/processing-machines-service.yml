@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: processing-machines
-  type: NodePort 
+  type: LoadBalancer
   ports:
     - name: processing-machines-service
       port: 5001
