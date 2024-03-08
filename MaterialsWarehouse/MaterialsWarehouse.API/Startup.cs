@@ -38,6 +38,6 @@ public class Startup
             endpoints.MapControllers();
         });
 
-        //app.ApplyMigrations();
+        app.ApplyMigrations();
     }
 }
