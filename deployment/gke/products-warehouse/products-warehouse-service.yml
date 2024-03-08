@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-warehouse-service
+spec:
+  selector:
+    app: products-warehouse
+  type: NodePort 
+  ports:
+    - name: products-warehouse-service
+      port: 5002
+      targetPort: 80
+      protocol: TCP
+      nodePort: 32000

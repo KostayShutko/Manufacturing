@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: processing-machines-deployment
+  labels:
+    app: processing-machines
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: processing-machines
+  template:
+    metadata:
+      labels:
+        app: processing-machines
+    spec:
+      containers:
+      - name: processingmachines
+        image: europe-west1-docker.pkg.dev/manufacturing-416112/images/processingmachines:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production

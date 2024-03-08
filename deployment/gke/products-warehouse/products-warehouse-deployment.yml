@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-warehouse-deployment
+  labels:
+    app: products-warehouse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products-warehouse
+  template:
+    metadata:
+      labels:
+        app: products-warehouse
+    spec:
+      containers:
+      - name: productswarehouse
+        image: europe-west1-docker.pkg.dev/manufacturing-416112/images/productswarehouse:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production

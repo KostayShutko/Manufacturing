@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transportations-deployment
+  labels:
+    app: transportations
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transportations
+  template:
+    metadata:
+      labels:
+        app: transportations
+    spec:
+      containers:
+      - name: transportations
+        image: europe-west1-docker.pkg.dev/manufacturing-416112/images/transportations:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production

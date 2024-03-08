@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workflow-orchestrator-deployment
+  labels:
+    app: workflow-orchestrator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workflow-orchestrator
+  template:
+    metadata:
+      labels:
+        app: workflow-orchestrator
+    spec:
+      containers:
+      - name: workfloworchestrator
+        image: europe-west1-docker.pkg.dev/manufacturing-416112/images/workfloworchestrator:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: processing-machines-service
+spec:
+  selector:
+    app: processing-machines
+  type: NodePort 
+  ports:
+    - name: processing-machines-service
+      port: 5001
+      targetPort: 80
+      protocol: TCP
+      nodePort: 31000
