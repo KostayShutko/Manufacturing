@@ -5,9 +5,10 @@ on:
 
 env:
   DEPLOYMENT_FOLDER_PATH: deployment/gke/sql-server
-  PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
-  GKE_ZONE: europe-west1-c
-  GKE_CLUSTER: manufactouring-cluster
+  SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
 
 jobs:
   deploy:
@@ -20,7 +21,7 @@ jobs:
     - name: Authenticate to google cloud
       uses: google-github-actions/auth@v2
       with:
-        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        credentials_json: ${{ env.SERVICE_ACCOUNT_KEY }}
 
     - name: Setup gcloud CLI
       uses: google-github-actions/setup-gcloud@v2
