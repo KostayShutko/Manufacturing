@@ -24,6 +24,11 @@ spec:
             value: Production
           - name: ConnectionStrings__DatabaseConnectionString
             valueFrom:
-                configMapKeyRef:
-                  name: sql-server-configmap
-                  key: materials-warehouse-connection-string
+              configMapKeyRef:
+                name: sql-server-configmap
+                key: materials-warehouse-connection-string
+          - name: RabbitMqConfiguration__HostName
+            valueFrom:
+              configMapKeyRef:
+                name: rabbitmq-configmap
+                key: host-name
