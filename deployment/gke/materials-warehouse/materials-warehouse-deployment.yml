@@ -22,3 +22,8 @@ spec:
         env:
           - name: ASPNETCORE_ENVIRONMENT
             value: Production
+          - name: ConnectionStrings__DatabaseConnectionString
+            valueFrom:
+                configMapKeyRef:
+                  name: sql-server-configmap
+                  key: materials-warehouse-connection-string
