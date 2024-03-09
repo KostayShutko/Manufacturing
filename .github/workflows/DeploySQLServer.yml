@@ -1,0 +1,36 @@
+name: DeploySQLServer
+
+on:
+  workflow_dispatch:
+
+env:
+  DEPLOYMENT_FOLDER_PATH: deployment/gke/sql-server
+  PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
+  GKE_ZONE: europe-west1-c
+  GKE_CLUSTER: manufactouring-cluster
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Authenticate to google cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+
+    - name: Setup gcloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+
+    - name: Setup gke auth plugin
+      uses: simenandre/setup-gke-gcloud-auth-plugin@v1
+
+    - name: Deploy to the GKE cluster
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $PROJECT_ID
+        kubectl apply -f $DEPLOYMENT_FOLDER_PATH
