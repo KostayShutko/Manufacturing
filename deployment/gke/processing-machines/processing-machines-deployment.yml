@@ -22,3 +22,13 @@ spec:
         env:
           - name: ASPNETCORE_ENVIRONMENT
             value: Production
+          - name: ConnectionStrings__DatabaseConnectionString
+            valueFrom:
+              configMapKeyRef:
+                name: sql-server-configmap
+                key: processing-machines-connection-string
+          - name: RabbitMqConfiguration__HostName
+            valueFrom:
+              configMapKeyRef:
+                name: rabbitmq-configmap
+                key: host-name
