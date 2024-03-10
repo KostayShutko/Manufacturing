@@ -11,4 +11,4 @@ spec:
       port: 5004
       targetPort: 80
       protocol: TCP
-      nodePort: 34000
+      nodePort: 30004
