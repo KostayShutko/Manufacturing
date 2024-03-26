@@ -6,8 +6,8 @@
 </div>
 
 
-- `Materials Warehouse Microservice`: It's used for 
-- `Products Warehouse Microservice`: It's used for 
-- `Transportations Microservice`: It's used for 
-- `Processing Machines Microservice`: It's used for 
-- `Workflow Orchestrator Microservice`: It's used for 
+`Materials Warehouse Microservice` - It's used for 
+`Products Warehouse Microservice` - It's used for 
+`Transportations Microservice` - It's used for 
+`Processing Machines Microservice` - It's used for 
+`Workflow Orchestrator Microservice` - It's used for 
