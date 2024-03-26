@@ -6,13 +6,13 @@
 </div>
 
 
-`Materials Warehouse Microservice` - It's used for 
+`Materials Warehouse Microservice` - It's used to receive and store material in a warehouse. The material is reserved by the orchestrator and then moved to the processing machine.
 
-`Products Warehouse Microservice` - It's used for 
+`Products Warehouse Microservice` - It's used to store finished products and shipping. The product is moved from the processing machine and stored in the warehouse until a shipment request is received.
 
-`Transportations Microservice` - It's used for 
+`Transportations Microservice` - It's used to move materials from the materials warehouse to the processing machines and after processing the product is moved from the processing machines to the products warehouse.
 
-`Processing Machines Microservice` - It's used for 
+`Processing Machines Microservice` - It's used to produce a product from a material.
 
-`Workflow Orchestrator Microservice` - It's used for 
-
+`Workflow Orchestrator Microservice` - It's used for managing the process of producing products. First, the orchestrator reserves a material and a place in the products warehouse, then if the both reservations are successful, the material is transported to the processing machine, then the orchestrator sends command with instructions on what product to produce on the processing machine, then producing a product, then the product is transported to the products warehouse, at this stage the process is completed and the product awaits shipment. The orchestrator tracks all events and change state of the process. The orchestrator also tracks errors and business exceptions, in this case the orchestrator trigger the compensation.
+ 
