@@ -3,3 +3,9 @@
 ## Project architecture
 
 ![microservises drawio](https://github.com/KostayShutko/Manufacturing/assets/26852817/21428027-3f7b-4768-ab11-820aa31f9e3e)
+
+- `Materials Warehouse Microservice`: It's used for 
+- `Products Warehouse Microservice`: It's used for 
+- `Transportations Microservice`: It's used for 
+- `Processing Machines Microservice`: It's used for 
+- `Workflow Orchestrator Microservice`: It's used for 
