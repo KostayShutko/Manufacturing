@@ -4,6 +4,8 @@
 <div align="center" style="margin-bottom:20px">
   <img src="https://github.com/KostayShutko/Manufacturing/assets/26852817/21428027-3f7b-4768-ab11-820aa31f9e3e"/>
 </div>
+
+
 - `Materials Warehouse Microservice`: It's used for 
 - `Products Warehouse Microservice`: It's used for 
 - `Transportations Microservice`: It's used for 
