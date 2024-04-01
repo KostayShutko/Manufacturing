@@ -16,3 +16,27 @@
 
 `Workflow Orchestrator Microservice` - It's used for managing the process of producing products. First, the orchestrator reserves a material and a place in the products warehouse, then if the both reservations are successful, the material is transported to the processing machine, then the orchestrator sends command with instructions on what product to produce on the processing machine, then producing a product, then the product is transported to the products warehouse, at this stage the process is completed and the product awaits shipment. The orchestrator tracks all events and change state of the process. The orchestrator also tracks errors and business exceptions, in this case the orchestrator trigger the compensation.
  
+## Tech Stack
+- .Net 6
+- DDD
+- CQRS
+- MS SQL
+- EF Core
+- MediatR
+- AutoMapper
+- FluentValidation
+- Global Error Handling
+- Specification Pattern
+- Result Pattern
+- Auditable Entities
+- Event-Driven Architecture
+- Distributed Transactions
+- MassTransit
+- RabbitMQ
+- Saga Pattern
+- Workflow Orchestrator
+- Docker
+- GitHub Actions
+- Kubernetes
+- Google Container Registry
+- Google Kubernetes Engine
