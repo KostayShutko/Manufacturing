@@ -45,5 +45,5 @@
 **Positive Workflow**
 
 <div align="center" style="margin-bottom:20px">
-  <img src="https://github.com/KostayShutko/Manufacturing/assets/26852817/8b80b7f0-655b-4761-9179-1372964fbec6"/>
+  <img src="https://github.com/KostayShutko/Manufacturing/assets/26852817/fc52ea27-d2f0-44c2-9faf-24f06df2d04f"/>
 </div>
