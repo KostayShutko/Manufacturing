@@ -42,3 +42,8 @@
 - Google Kubernetes Engine
 
 ## Use Cases
+**Positive Workflow**
+
+<div align="center" style="margin-bottom:20px">
+  <img src="https://github.com/KostayShutko/Manufacturing/assets/26852817/8b80b7f0-655b-4761-9179-1372964fbec6"/>
+</div>
