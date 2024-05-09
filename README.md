@@ -1,4 +1,4 @@
-> **This project is a work imitation of a factory. The main flow is the delivery of material to the material warehouse, transportation of material to processing machines, processing and production of products, transportation of products to the product warehouse, shipment of products.Production management is handled by the orchestrator, who runs the saga and monitors success, and in case of failure makes compensation.The project is developed as a distributed system on microservices using a message bus. RabbitMQ is a message broker, Masstransit is used for process orchestration and transactions.The project is deployed on Google Cloud using Docker containers and Kubernetes. The github actions triggers a docker image build, image push to Google Container Registry(GCR) and deployment to Google Kubernetes Engine(GKE).** 🚀
+> **This project simulates a factory workflow. The main process involves delivering materials to the warehouse, transportation them to processing machines, processing materials and creating products, transportation of finished products to the product warehouse for shipment. Production management is overseen by an orchestrator that coordinates the entire workflow, monitors success, and provides compensation in case of failures. The project is designed as a distributed system using microservices and a message bus. RabbitMQ is responsible for sending messages and MassTransit handles process orchestration and transactions. The project is deployed on Google Cloud using Docker containers and Kubernetes. GitHub Actions trigger the build of Docker images, which are then pushed to Google Container Registry (GCR) and deployed on Google Kubernetes Engine (GKE).** 🚀
 
 ## Project architecture
 <div align="center" style="margin-bottom:20px">
@@ -6,15 +6,15 @@
 </div>
 
 
-`Materials Warehouse Microservice` - It's used to receive and store material in a warehouse. The material is reserved by the orchestrator and then moved to the processing machine.
+`The Materials Warehouse Microservice` is responsible for receiving and storing materials in a warehouse. The material is reserved by the orchestrator and then moved to the processing machine.
 
-`Products Warehouse Microservice` - It's used to store finished products and shipping. The product is moved from the processing machine and stored in the warehouse until a shipment request is received.
+`The Products Warehouse Microservice` is responsible for storing finished products and shipping them. The product is moved from the processing machine and stored in the warehouse until a shipment request is received.
 
-`Transportations Microservice` - It's used to move materials from the materials warehouse to the processing machines and after processing the product is moved from the processing machines to the products warehouse.
+`The Transportations Microservice` facilitates the movement of materials from the materials warehouse to the processing machines. Once processing is complete, the product is then moved from the processing machines to the products warehouse.
 
-`Processing Machines Microservice` - It's used to produce a product from a material.
+`The Processing Machines Microservice` is responsible for transforming materials into finished products.
 
-`Workflow Orchestrator Microservice` - It's used for managing the process of producing products. First, the orchestrator reserves a material and a place in the products warehouse, then if the both reservations are successful, the material is transported to the processing machine, then the orchestrator sends command with instructions on what product to produce on the processing machine, then producing a product, then the product is transported to the products warehouse, at this stage the process is completed and the product awaits shipment. The orchestrator tracks all events and change state of the process. The orchestrator also tracks errors and business exceptions, in this case the orchestrator trigger the compensation.
+`The Workflow Orchestrator Microservice` plays a crucial role in managing the production process. First, the orchestrator begins by reserving both the necessary material and a spot in the products warehouse. If both reservations are successful, the reserved material is then transported from the materials warehouse to the processing machine. The orchestrator sends commands to the processing machine, specifying what product needs to be produced. The processing machine produces the desired product based on the provided instructions. Once the product is finished, it is transported from the processing machine to the products warehouse. At this stage, the production process is considered complete. The product is stored in the warehouse and ready for shipment. The orchestrator tracks all events and change state of the process. The orchestrator also tracks errors and business exceptions, the orchestrator triggers compensation mechanisms. These actions help maintain consistency and resolve any issues that arise during production.
  
 ## Tech Stack
 - .Net 6
@@ -40,3 +40,5 @@
 - Kubernetes
 - Google Container Registry
 - Google Kubernetes Engine
+
+## Use Cases
